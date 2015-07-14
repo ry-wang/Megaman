@@ -1,0 +1,10 @@
+Ryan	10	1	2	7
+Allen	30	1	26	3
+Deniz	30	0	5	25
+Jake	40	9	8	23
+ad	30	1	23	6
+Tyrrell	400	11	48	341
+qq	0	1	2	0
+OP	600	0	82	518
+Allen	500	0	92	408
+Boutanos	300	0	47	253
