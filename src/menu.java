@@ -1,6 +1,4 @@
-//Imports needed
 import java.awt.EventQueue;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -11,12 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-
 import java.awt.Color;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -27,20 +22,18 @@ import java.net.URL;
 /**
  * @ Description: Menu class, creates the main menu of the game
  * @ Author: Ryan Wang
- * @ Version: v1.0
- * June 12th, 2015
+ * @ Version: v2.0
+ * September 2016
  */
 
 public class menu extends JFrame implements ActionListener {
 
-	//Creation of all variables
 	private JPanel contentPane;
 	private int exit;
 	private int play;
 	static String name;
 	private Clip audioClip;
 
-	//Opens the frame
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -54,9 +47,7 @@ public class menu extends JFrame implements ActionListener {
 		});
 	}
 
-	//Constructor for the frame
 	public menu() {
-		//Sets title and size of frame, adds it to the contentpane
 		setTitle("Megaman X");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 550);
@@ -66,13 +57,11 @@ public class menu extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		//Sets the image logo of megaMan onto the frame
 		JLabel lblTitle = new JLabel("");
 		lblTitle.setIcon(new ImageIcon(menu.class.getResource("/menuImages/menu (Custom).png")));
 		lblTitle.setBounds(28, 13, 516, 227);
 		contentPane.add(lblTitle);
 
-		//Creation of all buttons and their respective actionListeners
 		JButton btnPlay = new JButton("Play");
 		btnPlay.setBackground(SystemColor.menu);
 		btnPlay.setForeground(Color.BLUE);
@@ -118,7 +107,6 @@ public class menu extends JFrame implements ActionListener {
 		btnExit.setActionCommand("Exit");
 		contentPane.add(btnExit);
 
-		//Starts the music, keeps it looping continuously
 		try {
 			URL url = this.getClass().getResource("music/menuAudio.wav");
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
@@ -127,18 +115,15 @@ public class menu extends JFrame implements ActionListener {
 			audioClip.start();
 			audioClip.loop(Clip.LOOP_CONTINUOUSLY);
 		}
-		catch (IOException e) {	
+		catch (IOException e) {
 		}
-		catch (UnsupportedAudioFileException e) {	
+		catch (UnsupportedAudioFileException e) {
 		}
-		catch (LineUnavailableException e) {	
+		catch (LineUnavailableException e) {
 		}
-	}//End of constructor
+	}
 
-	//Method that is run when a button is pressed
 	public void actionPerformed(ActionEvent evt) {
-
-		//Opens different frames depending on which action command, also stops the audio that's currently playing, hides this frame
 		if (evt.getActionCommand(). equals ("Instructions")) {
 			audioClip.stop();
 			this.dispose();
@@ -152,11 +137,9 @@ public class menu extends JFrame implements ActionListener {
 			control.creditFrame.setVisible(true);
 		}
 		if (evt.getActionCommand(). equals ("Play")) {
-			//Makes sure players read instructions before starting game; if they haven't read instructions, they get sent there
 			play = JOptionPane.showConfirmDialog(null, "Have you read the instructions?");
 			if (play == 0) {
 				name = JOptionPane.showInputDialog("Please enter your name: ");
-				//Code will only run if a name has been inputed
 				if (name != null) {
 					audioClip.stop();
 					this.dispose();
@@ -172,18 +155,16 @@ public class menu extends JFrame implements ActionListener {
 			}
 		}
 		if (evt.getActionCommand(). equals ("Exit")) {
-			//Exits the game after user confirmation
 			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 			if (exit == 0) {
 				System.exit(0);
 			}
 		}
-		//Opens the scores frame
 		if (evt.getActionCommand(). equals ("Scores")) {
 			audioClip.stop();
 			this.dispose();
 			control.scoreFrame  = new scores();
 			control.scoreFrame.setVisible(true);
 		}
-	}//End of actionPerformed method
-}//End of menu class
+	}
+}

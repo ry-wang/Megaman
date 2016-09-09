@@ -1,6 +1,4 @@
-//Imports needed
 import java.awt.EventQueue;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -10,25 +8,21 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.Color;
-
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
-
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 /**
  * @ Description: loseScreen class, displays when user loses in the game
  * @ Author: Ryan Wang
- * @ Version: v1.0
- * June 14th, 2015
+ * @ Version: v2.0
+ * September 2016
  */
 
 public class loseScreen extends JFrame implements ActionListener {
@@ -37,7 +31,6 @@ public class loseScreen extends JFrame implements ActionListener {
 	private Clip audioClip;
 	private int exit;
 
-	//Open frame
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,9 +44,7 @@ public class loseScreen extends JFrame implements ActionListener {
 		});
 	}
 
-	//Constructor for frame
 	public loseScreen() {
-		//Creates title, sets size of frame, adds it to content pane
 		setBackground(Color.BLACK);
 		setTitle("Game Over!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,7 +55,6 @@ public class loseScreen extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		//Game over label
 		JLabel lblGameOver = new JLabel("Game Over");
 		lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGameOver.setForeground(Color.WHITE);
@@ -72,7 +62,6 @@ public class loseScreen extends JFrame implements ActionListener {
 		lblGameOver.setBounds(91, 29, 242, 31);
 		contentPane.add(lblGameOver);
 
-		//Creation of all buttons and respective action listeners
 		JButton btnMenu = new JButton("Menu");
 		btnMenu.setForeground(Color.BLUE);
 		btnMenu.setFont(new Font("SWTOR Trajan", Font.PLAIN, 18));
@@ -97,7 +86,6 @@ public class loseScreen extends JFrame implements ActionListener {
 		btnExit.setActionCommand("Exit");
 		contentPane.add(btnExit);
 
-		//Plays music for this frame
 		try {
 			URL url = this.getClass().getResource("music/loseScreenAudio.wav");
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
@@ -111,33 +99,27 @@ public class loseScreen extends JFrame implements ActionListener {
 		}
 		catch (LineUnavailableException e) {	
 		}
+	}
 
-	}//End constructor
-
-	//Method that is run when button is pressed
 	public void actionPerformed(ActionEvent evt) {
-		//Opens different frames depending on which action command, also stops the audio that's currently playing, hides this frame
 		if (evt.getActionCommand().equals("Menu")) {
 			audioClip.stop();
 			this.dispose();
-			control.menuFrame  = new menu();
+			control.menuFrame = new menu();
 			control.menuFrame.setVisible(true);
 		}
 		if (evt.getActionCommand().equals("Exit")) {
-			//Exits the game after user confirmation
 			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 			if (exit == 0) {
 				System.exit(0);
 			}
 		}
-		//Stops music, closes this frame and opens game frame again where the applet runs
 		if (evt.getActionCommand().equals("Restart")) {
 			audioClip.stop();
 			this.dispose();
-			control.gameJFrame  = new gameFrame();
+			control.gameJFrame = new gameFrame();
 			control.gameJFrame.setVisible(true);
 		}
 
-	}//End actionPerformed method
-	
-}//End of loseScreen class
+	}
+}
