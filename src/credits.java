@@ -134,7 +134,7 @@ public class credits extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals("Menu")) {
 			audioClip.stop();
 			this.dispose();
-			control.menuFrame = new menu();
+			control.menuFrame = new Menu();
 			control.menuFrame.setVisible(true);
 		}
 		if (evt.getActionCommand(). equals ("Exit")) {

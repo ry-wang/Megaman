@@ -122,7 +122,7 @@ public class loadingScreen extends JFrame implements ActionListener, PropertyCha
 			menu = JOptionPane.showConfirmDialog(null, "Are you sure you want to return to menu?");
 			if (menu == 0) {
 				this.dispose();
-				control.menuFrame = new menu();
+				control.menuFrame = new Menu();
 				control.menuFrame.setVisible(true);
 			}
 		}

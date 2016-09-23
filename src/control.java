@@ -7,7 +7,7 @@
 
 public class control {
 	
-	static menu menuFrame;
+	static Menu menuFrame;
 	static credits creditFrame;
 	static instructions instFrame;
 	static loadingScreen loadFrame;

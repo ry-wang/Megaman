@@ -69,23 +69,23 @@ public class pauseScreen extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent evt) {
-		if (evt.getActionCommand() .equals ("Menu")) {
+		if (evt.getActionCommand().equals ("Menu")) {
 			menu = JOptionPane.showConfirmDialog(null, "Are you sure you want to return to menu? Your scores will not be saved.");
 			if (menu == 0) {
 				gameFrame.audioClip.stop();
 				this.dispose();
-				control.menuFrame = new menu();
+				control.menuFrame = new Menu();
 				control.menuFrame.setVisible(true);
 				control.gameJFrame.dispose();
 			}
 		}
-		if (evt.getActionCommand() .equals ("Exit")) {
+		if (evt.getActionCommand().equals ("Exit")) {
 			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit? Your scores will not be saved.");
 			if (exit == 0) {
 				System.exit(0);
 			}
 		}
-		if (evt.getActionCommand() .equals("Resume")) {
+		if (evt.getActionCommand().equals("Resume")) {
 			gameFrame.audioClip.start();
 			game.th = new Thread(tempApplet);
 			game.th.start();

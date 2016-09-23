@@ -163,7 +163,7 @@ public class completeScreen extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals("Menu")) {
 			audioClip.stop();
 			this.dispose();
-			control.menuFrame = new menu();
+			control.menuFrame = new Menu();
 			control.menuFrame.setVisible(true);
 		}
 		if (evt.getActionCommand(). equals ("Exit")) {
@@ -178,7 +178,7 @@ public class completeScreen extends JFrame implements ActionListener {
 		BufferedWriter bw = null;
 		try{
 			bw = new BufferedWriter(new FileWriter("scores.txt", true));
-			bw.write(menu.name + "\t" + points + "\t" + healthLost + "\t" + time + "\t" + score);
+			bw.write(Menu.name + "\t" + points + "\t" + healthLost + "\t" + time + "\t" + score);
 			bw.newLine();
 			bw.flush();
 		}

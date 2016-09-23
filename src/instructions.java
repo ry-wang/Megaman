@@ -144,7 +144,7 @@ public class instructions extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent evt) {
 		if (evt.getActionCommand() .equals ("Play")) {
-			menu.name = JOptionPane.showInputDialog("Please enter your name: ");
+			Menu.name = JOptionPane.showInputDialog("Please enter your name: ");
 			audioClip.stop();
 			this.dispose();
 			control.loadFrame = new loadingScreen();
@@ -153,7 +153,7 @@ public class instructions extends JFrame implements ActionListener {
 		if (evt.getActionCommand() .equals ("Menu")) {
 			audioClip.stop();
 			this.dispose();
-			control.menuFrame = new menu();
+			control.menuFrame = new Menu();
 			control.menuFrame.setVisible(true);
 		}
 	}
