@@ -9,7 +9,7 @@ public class control {
 	
 	static Menu menuFrame;
 	static credits creditFrame;
-	static instructions instFrame;
+	static Instructions instFrame;
 	static loadingScreen loadFrame;
 	static scores scoreFrame;
 	static gameFrame gameJFrame;

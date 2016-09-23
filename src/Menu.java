@@ -118,7 +118,7 @@ public class Menu extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals ("Instructions")) {
 			audioClip.stop();
 			this.dispose();
-			control.instFrame = new instructions();
+			control.instFrame = new Instructions();
 			control.instFrame.setVisible(true);
 		}
 		if (evt.getActionCommand().equals ("Credits")) {
@@ -141,7 +141,7 @@ public class Menu extends JFrame implements ActionListener {
 			if (play == 1) {
 				audioClip.stop();
 				this.dispose();
-				control.instFrame = new instructions();
+				control.instFrame = new Instructions();
 				control.instFrame.setVisible(true);
 			}
 		}

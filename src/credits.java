@@ -32,6 +32,8 @@ public class credits extends JFrame implements ActionListener {
 	private int exit;
 	private Clip audioClip;
 
+	private Font creditsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -65,28 +67,28 @@ public class credits extends JFrame implements ActionListener {
 		JLabel lblCredits1 = new JLabel("Design By: Ryan Wang");
 		lblCredits1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCredits1.setForeground(Color.BLUE);
-		lblCredits1.setFont(new Font("SWTOR Trajan", Font.ITALIC, 18));
+		lblCredits1.setFont(creditsFont);
 		lblCredits1.setBounds(116, 95, 261, 28);
 		contentPane.add(lblCredits1);
 
 		JLabel lblCredits2 = new JLabel("Programmed By: Ryan Wang");
 		lblCredits2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCredits2.setForeground(Color.BLUE);
-		lblCredits2.setFont(new Font("SWTOR Trajan", Font.ITALIC, 18));
+		lblCredits2.setFont(creditsFont);
 		lblCredits2.setBounds(70, 134, 341, 28);
 		contentPane.add(lblCredits2);
 
 		JLabel lblCredits3 = new JLabel("Artwork From: MegaMan X");
 		lblCredits3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCredits3.setForeground(Color.BLUE);
-		lblCredits3.setFont(new Font("SWTOR Trajan", Font.ITALIC, 18));
+		lblCredits3.setFont(creditsFont);
 		lblCredits3.setBounds(70, 175, 335, 28);
 		contentPane.add(lblCredits3);
 
 		JLabel lblCredits4 = new JLabel("Music From: MegaMan Collection");
 		lblCredits4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCredits4.setForeground(Color.BLUE);
-		lblCredits4.setFont(new Font("SWTOR Trajan", Font.ITALIC, 18));
+		lblCredits4.setFont(creditsFont);
 		lblCredits4.setBounds(43, 214, 400, 28);
 		contentPane.add(lblCredits4);
 
@@ -99,7 +101,7 @@ public class credits extends JFrame implements ActionListener {
 
 		JButton btnMenu = new JButton("Menu");
 		btnMenu.setForeground(Color.BLUE);
-		btnMenu.setFont(new Font("SWTOR Trajan", Font.PLAIN, 18));
+		btnMenu.setFont(creditsFont);
 		btnMenu.setBounds(84, 331, 134, 41);
 		btnMenu.addActionListener(this);
 		btnMenu.setActionCommand("Menu");
@@ -107,7 +109,7 @@ public class credits extends JFrame implements ActionListener {
 
 		JButton btnExit = new JButton("Exit");
 		btnExit.setForeground(Color.BLUE);
-		btnExit.setFont(new Font("SWTOR Trajan", Font.PLAIN, 18));
+		btnExit.setFont(creditsFont);
 		btnExit.setBounds(263, 331, 134, 41);
 		btnExit.addActionListener(this);
 		btnExit.setActionCommand("Exit");
