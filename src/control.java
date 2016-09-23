@@ -10,11 +10,11 @@ public class control {
 	static Menu menuFrame;
 	static credits creditFrame;
 	static Instructions instFrame;
-	static loadingScreen loadFrame;
-	static scores scoreFrame;
+	static LoadingScreen loadFrame;
+	static Scores scoreFrame;
 	static gameFrame gameJFrame;
 	static pauseScreen pauseFrame;
-	static completeScreen completeFrame;
-	static loseScreen loseFrame;
+	static CompleteScreen completeFrame;
+	static LoseScreen loseFrame;
 	
 }

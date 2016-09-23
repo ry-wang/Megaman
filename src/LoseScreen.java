@@ -1,9 +1,6 @@
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.EventQueue;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -13,29 +10,25 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URL;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 /**
- * @ Description: loseScreen class, displays when user loses in the game
+ * @ Description: LoseScreen class, displays when user loses in the game
  * @ Author: Ryan Wang
  * @ Version: v2.0
  * September 2016
  */
 
-public class loseScreen extends JFrame implements ActionListener {
+public class LoseScreen extends JFrame implements ActionListener {
 
-	private JPanel contentPane;
-	private Clip audioClip;
-	private int exit;
+	final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/loseScreenAudio.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					loseScreen frame = new loseScreen();
+					LoseScreen frame = new LoseScreen();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +37,9 @@ public class loseScreen extends JFrame implements ActionListener {
 		});
 	}
 
-	public loseScreen() {
+	public LoseScreen() {
+		JPanel contentPane;
+
 		setBackground(Color.BLACK);
 		setTitle("Game Over!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,17 +82,10 @@ public class loseScreen extends JFrame implements ActionListener {
 		contentPane.add(btnExit);
 
 		try {
-			URL url = this.getClass().getResource("music/loseScreenAudio.wav");
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-			audioClip = AudioSystem.getClip();
-			audioClip.open(audioIn);
-			audioClip.start();
+			audioClip.loop();
 		}
-		catch (IOException e) {	
-		}
-		catch (UnsupportedAudioFileException e) {	
-		}
-		catch (LineUnavailableException e) {	
+		catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 
@@ -109,7 +97,7 @@ public class loseScreen extends JFrame implements ActionListener {
 			control.menuFrame.setVisible(true);
 		}
 		if (evt.getActionCommand().equals("Exit")) {
-			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
+			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 			if (exit == 0) {
 				System.exit(0);
 			}

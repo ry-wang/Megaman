@@ -1,12 +1,7 @@
-//Imports needed
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.EventQueue;
 import java.awt.Font;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,15 +10,12 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -38,13 +30,11 @@ import javax.swing.DefaultComboBoxModel;
  * June 14th, 2015
  */
 
+public class Scores extends JFrame implements ActionListener {
 
-public class scores extends JFrame implements ActionListener {
-
-	//Creation of all variables and objects in the JFrame
 	private JPanel contentPane;
 	private JTable table;
-	private Clip audioClip;
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/scoresAudio.wav"));
 	private JComboBox cbxSortType = new JComboBox();
 	private JComboBox cbxSearchType = new JComboBox();
 
@@ -59,7 +49,6 @@ public class scores extends JFrame implements ActionListener {
 	private int timesFound = 0;
 	private int exit;
 	private int entryNum = 1;
-	private int sortType;
 
 	private String fileName = "scores.txt";
 	private String [] tableHeaders = new String[5];
@@ -68,12 +57,11 @@ public class scores extends JFrame implements ActionListener {
 	private String tempData[];
 	private String inputText;
 
-	//Opens the frame
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					scores frame = new scores();
+					Scores frame = new Scores();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -82,9 +70,7 @@ public class scores extends JFrame implements ActionListener {
 		});
 	}
 
-	//Constructor for class
-	public scores() {
-		//Creates title, sets size and adds it to the content pane
+	public Scores() {
 		setTitle("Scores");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 625, 550);
@@ -93,7 +79,6 @@ public class scores extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		//Creation of all buttons and their respective actionListeners
 		JButton btnPlay = new JButton("Play");
 		btnPlay.setForeground(Color.BLUE);
 		btnPlay.setFont(new Font("SWTOR Trajan", Font.PLAIN, 18));
@@ -119,7 +104,6 @@ public class scores extends JFrame implements ActionListener {
 		btnExit.setBounds(394, 421, 124, 56);
 		contentPane.add(btnExit);
 
-		//Label for the frame
 		JLabel lblScoreBoard = new JLabel("Scoreboard");
 		lblScoreBoard.setHorizontalAlignment(SwingConstants.CENTER);
 		lblScoreBoard.setForeground(Color.WHITE);
@@ -127,7 +111,6 @@ public class scores extends JFrame implements ActionListener {
 		lblScoreBoard.setBounds(10, 29, 589, 56);
 		contentPane.add(lblScoreBoard);
 
-		//Combobox for selecting sort type
 		cbxSortType.setForeground(Color.BLUE);
 		cbxSortType.setFont(new Font("SWTOR Trajan", Font.PLAIN, 13));
 		cbxSortType.setModel(new DefaultComboBoxModel(new String[] {"Most Points", "Least Health Lost", "Fastest Time", "Total Score"}));
@@ -135,7 +118,6 @@ public class scores extends JFrame implements ActionListener {
 		cbxSortType.setSelectedIndex(-1);
 		contentPane.add(cbxSortType);
 
-		//Sort button
 		btnSort.setForeground(Color.BLUE);
 		btnSort.setFont(new Font("SWTOR Trajan", Font.PLAIN, 18));
 		btnSort.setBounds(414, 321, 141, 29);
@@ -143,7 +125,6 @@ public class scores extends JFrame implements ActionListener {
 		btnSort.setActionCommand("Sort");
 		contentPane.add(btnSort);
 
-		//Search button
 		btnSearch.setForeground(Color.BLUE);
 		btnSearch.setFont(new Font("SWTOR Trajan", Font.PLAIN, 18));
 		btnSearch.setBounds(414, 361, 141, 29);
@@ -151,7 +132,6 @@ public class scores extends JFrame implements ActionListener {
 		btnSearch.setActionCommand("Search");
 		contentPane.add(btnSearch);
 
-		//Combobox for selecting search type
 		cbxSearchType.setForeground(Color.BLUE);
 		cbxSearchType.setModel(new DefaultComboBoxModel(new String[] {"Name", "Points", "Health Lost", "Time", "Total Score"}));
 		cbxSearchType.setFont(new Font("SWTOR Trajan", Font.PLAIN, 13));
@@ -159,7 +139,6 @@ public class scores extends JFrame implements ActionListener {
 		cbxSearchType.setSelectedIndex(-1);
 		contentPane.add(cbxSearchType);
 
-		//Labels that tell what each combobox is
 		JLabel lblSortBy = new JLabel("Sort By:");
 		lblSortBy.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSortBy.setForeground(Color.WHITE);
@@ -174,7 +153,6 @@ public class scores extends JFrame implements ActionListener {
 		lblSearchBy.setBounds(39, 360, 124, 32);
 		contentPane.add(lblSearchBy);
 
-		//Button to view original table after search has been done
 		btnViewOriginal = new JButton("View Original");
 		btnViewOriginal.setForeground(Color.BLUE);
 		btnViewOriginal.setEnabled(false);
@@ -185,28 +163,18 @@ public class scores extends JFrame implements ActionListener {
 		btnViewOriginal.setBounds(403, 328, 152, 56);
 		contentPane.add(btnViewOriginal);
 
-		//Calls the methods that initializes table, reads info from file, and then displays to frame
 		tableHeaders();
 		inputFromFile();
 		setModelTable();
 		displayScoreTable();
 
-		//Starts the music, keeps it looping continuously
 		try {
-			URL url = this.getClass().getResource("music/scoresAudio.wav");
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-			audioClip = AudioSystem.getClip();
-			audioClip.open(audioIn);
-			audioClip.start();
-			audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+			audioClip.loop();
 		}
-		catch (IOException e) {	
+		catch (Exception e) {
+			e.printStackTrace();
 		}
-		catch (UnsupportedAudioFileException e) {	
-		}
-		catch (LineUnavailableException e) {	
-		}
-	}//End constructor
+	}
 
 	//Method that is called when specific buttons are pressed
 	public void actionPerformed(ActionEvent evt) {
@@ -217,7 +185,7 @@ public class scores extends JFrame implements ActionListener {
 			Menu.name = JOptionPane.showInputDialog("Please enter your name: ");
 			audioClip.stop();
 			this.dispose();
-			control.loadFrame = new loadingScreen();
+			control.loadFrame = new LoadingScreen();
 			control.loadFrame.setVisible(true);
 		}
 		//Returns to main menu
@@ -282,23 +250,16 @@ public class scores extends JFrame implements ActionListener {
 		tableHeaders[4]=("Total Score");
 	}//End of tableHeaders method
 
-	//Method that reads textFile and copies that data into the array when program starts
 	public void inputFromFile() {
 		entryNum = 0;
 		scoreTable = new String[entryNum][5];
 		try {
-			//Create FileReader and BufferReader to read input from text file
 			FileReader inputFile = new FileReader(fileName);
 			BufferedReader bufferReader = new BufferedReader(inputFile);
 
-			//Loop to continue reading each line of text in file until there is none left
 			while ((inputText = bufferReader.readLine()) != null) {
-				//Prevents errors when splitting string
 				try {
-					//Removes the tabs from each line, and puts it into an array
 					tempData = inputText.split("\t");
-					//Sets values into the scoreTable based on text input file
-					//Calls resizeScoreTable, which resizes the array and then sets all the data in
 					resizeScoreTable();
 					scoreTable[entryNum - 1][0] = tempData[0];
 					scoreTable[entryNum - 1][1] = tempData[1];
@@ -307,27 +268,22 @@ public class scores extends JFrame implements ActionListener {
 					scoreTable[entryNum - 1][4] = tempData[4];
 				}
 				catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
-			//Close reader
 			bufferReader.close();
 		}
-		//Prints error if try can't be run
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-	}//End of inputFromTextFile method
+	}
 
-	//Method that displays the table on the frame
 	public void displayScoreTable() {
-		//refresh the Jtable and set the data showing to the default table model
 		table = new JTable(model) {
-			//Makes all cells uneditable
 			public boolean isCellEditable(int row,int column){
 				return false;
 			}
 		};
-		//Sets the width for all the headers in the table
 		table.getColumnModel().getColumn(0).setPreferredWidth(175);
 		table.getColumnModel().getColumn(1).setPreferredWidth(80);
 		table.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -335,7 +291,7 @@ public class scores extends JFrame implements ActionListener {
 		table.getColumnModel().getColumn(4).setPreferredWidth(100);
 		table.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		table.getTableHeader().setReorderingAllowed(false);
-		//creating scrollPane with Jtable and scroll bars within it
+
 		JScrollPane scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setBounds(50, 97, 505, 199);
 		try {
@@ -343,9 +299,8 @@ public class scores extends JFrame implements ActionListener {
 		}
 		catch (NullPointerException e) {
 		}
-	}//End displayScoreTable method
+	}
 
-	//resizeScoreTable method. Used to resize scoreTable array in order to make space for a new entry
 	public void resizeScoreTable() {
 		//Create a temp array to hold the data
 		String[][] tempScoreTable = new String [entryNum][5];

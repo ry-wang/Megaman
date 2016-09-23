@@ -1,7 +1,3 @@
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,12 +11,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URL;
 import javax.swing.SwingConstants;
 
 /**
- * @ Description: Credits class, displays the credits of the program
+ * @ Description: Instructions class, displays the credits of the program
  * @ Author: Ryan Wang
  * @ Version: v2.0
  * September 2016
@@ -29,9 +23,9 @@ import javax.swing.SwingConstants;
 public class Instructions extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private AudioClip audioClip;
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/instructionsAudio.wav"));
 
-    private Font instructionsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
+    private final Font instructionsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -129,8 +123,6 @@ public class Instructions extends JFrame implements ActionListener {
 		contentPane.add(lbl7);
 
 		try {
-			URL url = this.getClass().getResource("music/instructionsAudio.wav");
-			audioClip = Applet.newAudioClip(url);
 			audioClip.loop();
 		}
 		catch(Exception e){
@@ -144,7 +136,7 @@ public class Instructions extends JFrame implements ActionListener {
 			Menu.name = JOptionPane.showInputDialog("Please enter your name: ");
 			audioClip.stop();
 			this.dispose();
-			control.loadFrame = new loadingScreen();
+			control.loadFrame = new LoadingScreen();
 			control.loadFrame.setVisible(true);
 		}
 		if (evt.getActionCommand().equals("Menu")) {

@@ -13,7 +13,6 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 
 /**
  * @ Description: Menu class, creates the main menu of the game
@@ -24,10 +23,10 @@ import java.net.URL;
 
 public class Menu extends JFrame implements ActionListener {
 
+	static String name;
+    private final Font menuFont = new Font("SWTOR Trajan", Font.PLAIN, 18);
+    private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/menuAudio.wav"));
 	private JPanel contentPane;
-    private Font menuFont = new Font("SWTOR Trajan", Font.PLAIN, 18);
-    static String name;
-    private AudioClip audioClip;
 	private int exit;
 	private int play;
 
@@ -105,8 +104,6 @@ public class Menu extends JFrame implements ActionListener {
 		contentPane.add(btnExit);
 
 		try {
-			URL url = this.getClass().getResource("music/menuAudio.wav");
-			audioClip = Applet.newAudioClip(url);
 			audioClip.loop();
 		}
         catch(Exception e){
@@ -121,20 +118,20 @@ public class Menu extends JFrame implements ActionListener {
 			control.instFrame = new Instructions();
 			control.instFrame.setVisible(true);
 		}
-		if (evt.getActionCommand().equals ("Credits")) {
+		if (evt.getActionCommand().equals("Credits")) {
 			audioClip.stop();
 			this.dispose();
 			control.creditFrame = new credits();
 			control.creditFrame.setVisible(true);
 		}
-		if (evt.getActionCommand().equals ("Play")) {
+		if (evt.getActionCommand().equals("Play")) {
 			play = JOptionPane.showConfirmDialog(null, "Have you read the instructions?");
 			if (play == 0) {
 				name = JOptionPane.showInputDialog("Please enter your name: ");
 				if (name != null) {
 					audioClip.stop();
 					this.dispose();
-					control.loadFrame = new loadingScreen();
+					control.loadFrame = new LoadingScreen();
 					control.loadFrame.setVisible(true);
 				}
 			}
@@ -154,7 +151,7 @@ public class Menu extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals ("Scores")) {
 			audioClip.stop();
 			this.dispose();
-			control.scoreFrame = new scores();
+			control.scoreFrame = new Scores();
 			control.scoreFrame.setVisible(true);
 		}
 	}

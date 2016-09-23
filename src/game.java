@@ -142,7 +142,7 @@ public class game extends Applet implements Runnable {
 			health = megaMan.getHealth();
 			//If health falls below 0, game ends, game over screen shows
 			if (health <= 0) {
-				control.loseFrame = new loseScreen();
+				control.loseFrame = new LoseScreen();
 				control.loseFrame.setVisible(true);
 				gameFrame.audioClip.stop();
 				control.gameJFrame.dispose();
@@ -372,7 +372,7 @@ public class game extends Applet implements Runnable {
 			}
 			if (level == 3) {
 				if ((megaMan.getX() >= 960) && (megaMan.getY() < 200)) {
-					control.completeFrame = new completeScreen();
+					control.completeFrame = new CompleteScreen();
 					control.completeFrame.setVisible(true);
 					gameFrame.audioClip.stop();
 					control.gameJFrame.dispose();

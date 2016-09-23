@@ -1,11 +1,8 @@
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,14 +18,14 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 /**
- * @ Description: completeScreen class, shows after user completes game
+ * @ Description: CompleteScreen class, shows after user completes game
  * @ Author: Ryan Wang
  * @ Version: v2.0
  * September 2016
  */
 
 
-public class completeScreen extends JFrame implements ActionListener {
+public class CompleteScreen extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private int time;
@@ -36,13 +33,13 @@ public class completeScreen extends JFrame implements ActionListener {
 	private int healthLost;
 	private int score;
 	private int exit;
-	private Clip audioClip;
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/completeScreenMusic.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					completeScreen frame = new completeScreen();
+					CompleteScreen frame = new CompleteScreen();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +48,7 @@ public class completeScreen extends JFrame implements ActionListener {
 		});
 	}
 
-	public completeScreen() {
+	public CompleteScreen() {
 		setBackground(Color.BLACK);
 		setTitle("Game Complete!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -142,18 +139,10 @@ public class completeScreen extends JFrame implements ActionListener {
 		contentPane.add(lblNum4);
 
 		try {
-			URL url = this.getClass().getResource("music/completeScreenMusic.wav");
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-			audioClip = AudioSystem.getClip();
-			audioClip.open(audioIn);
-			audioClip.start();
-			audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+			audioClip.loop();
 		}
-		catch (IOException e) {	
-		}
-		catch (UnsupportedAudioFileException e) {	
-		}
-		catch (LineUnavailableException e) {	
+		catch(Exception e){
+			e.printStackTrace();
 		}
 
 		appendToText();

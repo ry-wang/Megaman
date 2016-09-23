@@ -25,7 +25,7 @@ import java.awt.SystemColor;
  * September 2016
  */
 
-public class loadingScreen extends JFrame implements ActionListener, PropertyChangeListener {
+public class LoadingScreen extends JFrame implements ActionListener, PropertyChangeListener {
 	
 	private JPanel contentPane;
 	private Task Task;
@@ -37,7 +37,7 @@ public class loadingScreen extends JFrame implements ActionListener, PropertyCha
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					loadingScreen frame = new loadingScreen();
+					LoadingScreen frame = new LoadingScreen();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +46,7 @@ public class loadingScreen extends JFrame implements ActionListener, PropertyCha
 		});
 	}
 
-	public loadingScreen() {
+	public LoadingScreen() {
 		setTitle("Loading...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
