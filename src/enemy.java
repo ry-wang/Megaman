@@ -1,19 +1,17 @@
-//Imports needed
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * @ Description: enemy class for summative game, controls activity for enemies
+ * @ Description: Enemy class for game, controls activity for enemies
  * @ Author: Ryan Wang
  * @ Version: v1.0
- * June 13th, 2015
+ * September 2016
  */
 
 public class enemy {
 	
-	//Creation of all variables/attributes of each enemy
 	private int xPosition;
 	private int yPosition;
 	private int imageNum = 1;

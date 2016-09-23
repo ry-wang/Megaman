@@ -1,13 +1,12 @@
 /**
- * @ Description: Control class, defines all the various frames in the program, makes them easier to reference
+ * @ Description: Control class, defines all the various window frames in the program
  * @ Author: Ryan Wang
- * @ Version: v1.0
- * June 12th, 2015
+ * @ Version: v2.0
+ * September 2016
  */
 
 public class control {
 	
-	//Creating specific instances of each class
 	static menu menuFrame;
 	static credits creditFrame;
 	static instructions instFrame;
@@ -18,4 +17,4 @@ public class control {
 	static completeScreen completeFrame;
 	static loseScreen loseFrame;
 	
-}//End of control class
+}

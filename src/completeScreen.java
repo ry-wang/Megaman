@@ -1,9 +1,6 @@
-//Imports needed
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -13,31 +10,26 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.Color;
-
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 /**
  * @ Description: completeScreen class, shows after user completes game
  * @ Author: Ryan Wang
- * @ Version: v1.0
- * June 14th, 2015
+ * @ Version: v2.0
+ * September 2016
  */
 
 
 public class completeScreen extends JFrame implements ActionListener {
 
-	//Variables needed
 	private JPanel contentPane;
 	private int time;
 	private int points;
@@ -46,7 +38,6 @@ public class completeScreen extends JFrame implements ActionListener {
 	private int exit;
 	private Clip audioClip;
 
-	//Opens the frame
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -60,9 +51,7 @@ public class completeScreen extends JFrame implements ActionListener {
 		});
 	}
 
-	//Constructor for frame
 	public completeScreen() {
-		//Creates title, sets size of the frame
 		setBackground(Color.BLACK);
 		setTitle("Game Complete!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,18 +62,14 @@ public class completeScreen extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		//Gets the time, points, healthLost from the applet class
 		time = game.time;
 		points = game.points;
 		healthLost = (100 - game.health);
-		//Calculates score
 		score = points - healthLost - time;
-		//Lowest score possible is 0, won't give a negative score
 		if (score < 0) {
 			score = 0;
 		}
 
-		//Creates all the labels in the frame
 		JLabel lblTitle = new JLabel("Game Complete");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setForeground(Color.WHITE);
@@ -116,7 +101,6 @@ public class completeScreen extends JFrame implements ActionListener {
 		lblScore.setBounds(75, 216, 140, 31);
 		contentPane.add(lblScore);
 
-		//Buttons in the frame, also adds action commands to them
 		JButton btnMenu = new JButton("Menu");
 		btnMenu.setForeground(Color.BLUE);
 		btnMenu.setFont(new Font("SWTOR Trajan", Font.PLAIN, 18));
@@ -133,7 +117,6 @@ public class completeScreen extends JFrame implements ActionListener {
 		btnExit.setBounds(250, 270, 124, 56);
 		contentPane.add(btnExit);
 
-		//Creates the label for all of the info on the game data
 		JLabel lblNum1 = new JLabel(String.valueOf(points));
 		lblNum1.setForeground(Color.BLUE);
 		lblNum1.setFont(new Font("SWTOR Trajan", Font.ITALIC, 16));
@@ -158,7 +141,6 @@ public class completeScreen extends JFrame implements ActionListener {
 		lblNum4.setBounds(354, 216, 90, 31);
 		contentPane.add(lblNum4);
 
-		//Plays music, tells it to loop continuously
 		try {
 			URL url = this.getClass().getResource("music/completeScreenMusic.wav");
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
@@ -174,53 +156,42 @@ public class completeScreen extends JFrame implements ActionListener {
 		catch (LineUnavailableException e) {	
 		}
 
-		//Calls appendToText method
 		appendToText();
 	}
 
-	//Method that is run when a button is pressed
 	public void actionPerformed(ActionEvent evt) {
-		//Opens/closes the frame based on whichever command is called
 		if (evt.getActionCommand().equals("Menu")) {
 			audioClip.stop();
-			//Closes this frame, opens menu
 			this.dispose();
 			control.menuFrame = new menu();
 			control.menuFrame.setVisible(true);
 		}
-		//Exits program if user confirms
 		if (evt.getActionCommand(). equals ("Exit")) {
 			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 			if (exit == 0) {
 				System.exit(0);
 			}
 		}
-	}//End actionPerformed method
+	}
 
-	//Append to text method
 	public void appendToText() {
 		BufferedWriter bw = null;
-		//Tries to append to the text file
 		try{
 			bw = new BufferedWriter(new FileWriter("scores.txt", true));
-			//Appends the line properly formatted
-			bw.write(menu.name + "\t" + points + "\t" + healthLost + "\t" + time + "\t" + score); 
+			bw.write(menu.name + "\t" + points + "\t" + healthLost + "\t" + time + "\t" + score);
 			bw.newLine();
 			bw.flush();
 		}
-		//Catch statement for exceptions
 		catch(IOException e){
 		}
 		finally{
-			if(bw !=null){
-				//Tries closing the buffered writer after append is finished
+			if(bw != null){
 				try{
 					bw.close();
 				}
-				catch(IOException e2){
+				catch(IOException e2) {
 				}
 			}
 		}
-	}//End of append to text method
-
-}//End of completeScreen class
+	}
+}

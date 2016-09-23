@@ -1,7 +1,4 @@
-//Imports needed
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -11,26 +8,22 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.SystemColor;
-
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
-
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 /**
  * @ Description: Credits class, displays the credits of the program
  * @ Author: Ryan Wang
- * @ Version: v1.0
- * June 14th, 2015
+ * @ Version: v2.0
+ * September 2016
  */
 
 public class credits extends JFrame implements ActionListener {
@@ -39,7 +32,6 @@ public class credits extends JFrame implements ActionListener {
 	private int exit;
 	private Clip audioClip;
 
-	//Opens the frame
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,9 +45,7 @@ public class credits extends JFrame implements ActionListener {
 		});
 	}
 
-	//Constructor for class
 	public credits() {
-		//Sets size and title of JFrame, adds it to content pane
 		setTitle("Credits");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
@@ -65,7 +55,6 @@ public class credits extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		//Creation of all labels shown in the frame
 		JLabel lblCredits = new JLabel("Credits");
 		lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCredits.setForeground(Color.WHITE);
@@ -108,7 +97,6 @@ public class credits extends JFrame implements ActionListener {
 		lblThanks.setBounds(43, 276, 400, 28);
 		contentPane.add(lblThanks);
 
-		//Creation of buttons and their respective actionListeners
 		JButton btnMenu = new JButton("Menu");
 		btnMenu.setForeground(Color.BLUE);
 		btnMenu.setFont(new Font("SWTOR Trajan", Font.PLAIN, 18));
@@ -125,7 +113,6 @@ public class credits extends JFrame implements ActionListener {
 		btnExit.setActionCommand("Exit");
 		contentPane.add(btnExit);
 
-		//Plays the music in a continous loop
 		try {
 			URL url = this.getClass().getResource("music/creditsAudio.wav");
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
@@ -140,26 +127,22 @@ public class credits extends JFrame implements ActionListener {
 		}
 		catch (LineUnavailableException e) {	
 		}
-	}//End constructor
+	}
 
-	//Method that is run when button is pressed
 	public void actionPerformed(ActionEvent evt) {
 
-		//Opens/closes the frame based on whichever command is called
-		//Returns to menu, stops music
 		if (evt.getActionCommand().equals("Menu")) {
 			audioClip.stop();
 			this.dispose();
 			control.menuFrame = new menu();
 			control.menuFrame.setVisible(true);
 		}
-		//Exits program after user confirmation
 		if (evt.getActionCommand(). equals ("Exit")) {
 			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 			if (exit == 0) {
 				System.exit(0);
 			}
 		}
-	}//End actionPerformed method
+	}
 
-}//End credits class
+}
