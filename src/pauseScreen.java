@@ -25,7 +25,7 @@ public class pauseScreen extends JFrame implements ActionListener {
 	Runnable tempApplet;
 
 	public pauseScreen(Runnable input) {
-		gameFrame.audioClip.stop();
+		GameFrame.audioClip.stop();
 		tempApplet = input;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,11 +72,11 @@ public class pauseScreen extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals ("Menu")) {
 			menu = JOptionPane.showConfirmDialog(null, "Are you sure you want to return to menu? Your scores will not be saved.");
 			if (menu == 0) {
-				gameFrame.audioClip.stop();
+				GameFrame.audioClip.stop();
 				this.dispose();
-				control.menuFrame = new Menu();
-				control.menuFrame.setVisible(true);
-				control.gameJFrame.dispose();
+				Control.menuFrame = new Menu();
+				Control.menuFrame.setVisible(true);
+				Control.gameJFrame.dispose();
 			}
 		}
 		if (evt.getActionCommand().equals ("Exit")) {
@@ -86,9 +86,9 @@ public class pauseScreen extends JFrame implements ActionListener {
 			}
 		}
 		if (evt.getActionCommand().equals("Resume")) {
-			gameFrame.audioClip.start();
-			game.th = new Thread(tempApplet);
-			game.th.start();
+			GameFrame.audioClip.loop();
+			Game.th = new Thread(tempApplet);
+			Game.th.start();
 			this.dispose();
 		}
 	}

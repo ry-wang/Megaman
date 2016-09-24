@@ -59,9 +59,9 @@ public class CompleteScreen extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		time = game.time;
-		points = game.points;
-		healthLost = (100 - game.health);
+		time = Game.time;
+		points = Game.points;
+		healthLost = (100 - Game.health);
 		score = points - healthLost - time;
 		if (score < 0) {
 			score = 0;
@@ -152,8 +152,8 @@ public class CompleteScreen extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals("Menu")) {
 			audioClip.stop();
 			this.dispose();
-			control.menuFrame = new Menu();
-			control.menuFrame.setVisible(true);
+			Control.menuFrame = new Menu();
+			Control.menuFrame.setVisible(true);
 		}
 		if (evt.getActionCommand(). equals ("Exit")) {
 			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");

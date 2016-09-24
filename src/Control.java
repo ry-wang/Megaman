@@ -5,14 +5,14 @@
  * September 2016
  */
 
-public class control {
+public class Control {
 	
 	static Menu menuFrame;
 	static credits creditFrame;
 	static Instructions instFrame;
 	static LoadingScreen loadFrame;
 	static Scores scoreFrame;
-	static gameFrame gameJFrame;
+	static GameFrame gameJFrame;
 	static pauseScreen pauseFrame;
 	static CompleteScreen completeFrame;
 	static LoseScreen loseFrame;

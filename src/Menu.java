@@ -115,14 +115,14 @@ public class Menu extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals ("Instructions")) {
 			audioClip.stop();
 			this.dispose();
-			control.instFrame = new Instructions();
-			control.instFrame.setVisible(true);
+			Control.instFrame = new Instructions();
+			Control.instFrame.setVisible(true);
 		}
 		if (evt.getActionCommand().equals("Credits")) {
 			audioClip.stop();
 			this.dispose();
-			control.creditFrame = new credits();
-			control.creditFrame.setVisible(true);
+			Control.creditFrame = new credits();
+			Control.creditFrame.setVisible(true);
 		}
 		if (evt.getActionCommand().equals("Play")) {
 			play = JOptionPane.showConfirmDialog(null, "Have you read the instructions?");
@@ -131,15 +131,15 @@ public class Menu extends JFrame implements ActionListener {
 				if (name != null) {
 					audioClip.stop();
 					this.dispose();
-					control.loadFrame = new LoadingScreen();
-					control.loadFrame.setVisible(true);
+					Control.loadFrame = new LoadingScreen();
+					Control.loadFrame.setVisible(true);
 				}
 			}
 			if (play == 1) {
 				audioClip.stop();
 				this.dispose();
-				control.instFrame = new Instructions();
-				control.instFrame.setVisible(true);
+				Control.instFrame = new Instructions();
+				Control.instFrame.setVisible(true);
 			}
 		}
 		if (evt.getActionCommand().equals ("Exit")) {
@@ -151,8 +151,8 @@ public class Menu extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals ("Scores")) {
 			audioClip.stop();
 			this.dispose();
-			control.scoreFrame = new Scores();
-			control.scoreFrame.setVisible(true);
+			Control.scoreFrame = new Scores();
+			Control.scoreFrame.setVisible(true);
 		}
 	}
 }

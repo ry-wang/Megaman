@@ -136,14 +136,14 @@ public class Instructions extends JFrame implements ActionListener {
 			Menu.name = JOptionPane.showInputDialog("Please enter your name: ");
 			audioClip.stop();
 			this.dispose();
-			control.loadFrame = new LoadingScreen();
-			control.loadFrame.setVisible(true);
+			Control.loadFrame = new LoadingScreen();
+			Control.loadFrame.setVisible(true);
 		}
 		if (evt.getActionCommand().equals("Menu")) {
 			audioClip.stop();
 			this.dispose();
-			control.menuFrame = new Menu();
-			control.menuFrame.setVisible(true);
+			Control.menuFrame = new Menu();
+			Control.menuFrame.setVisible(true);
 		}
 	}
 }

@@ -1,12 +1,7 @@
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.io.IOException;
-import java.net.URL;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -18,16 +13,16 @@ import javax.swing.border.EmptyBorder;
  * September 2016
  */
 
-public class gameFrame extends JFrame {
+public class GameFrame extends JFrame {
 
 	private JPanel contentPane;
-	static Clip audioClip;
+	static AudioClip audioClip;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gameFrame frame = new gameFrame();
+					GameFrame frame = new GameFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +31,7 @@ public class gameFrame extends JFrame {
 		});
 	}
 
-	public gameFrame() {
+	public GameFrame() {
 		setTitle("Megaman X");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
@@ -46,21 +41,14 @@ public class gameFrame extends JFrame {
 		setContentPane(contentPane);
 		
 		try {
-			URL url = this.getClass().getResource("music/gameAudio.wav");
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-			audioClip = AudioSystem.getClip();
-			audioClip.open(audioIn);
-			audioClip.start();
-			audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+			audioClip = Applet.newAudioClip(this.getClass().getResource("music/gameAudio.wav"));
+			audioClip.loop();
 		}
-		catch (IOException e) {	
-		}
-		catch (UnsupportedAudioFileException e) {	
-		}
-		catch (LineUnavailableException e) {	
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		game app = new game();
+		Game app = new Game();
 		add(app);
 		app.init();
 		app.start();

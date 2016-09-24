@@ -93,8 +93,8 @@ public class LoseScreen extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals("Menu")) {
 			audioClip.stop();
 			this.dispose();
-			control.menuFrame = new Menu();
-			control.menuFrame.setVisible(true);
+			Control.menuFrame = new Menu();
+			Control.menuFrame.setVisible(true);
 		}
 		if (evt.getActionCommand().equals("Exit")) {
 			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
@@ -105,8 +105,8 @@ public class LoseScreen extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals("Restart")) {
 			audioClip.stop();
 			this.dispose();
-			control.gameJFrame = new gameFrame();
-			control.gameJFrame.setVisible(true);
+			Control.gameJFrame = new GameFrame();
+			Control.gameJFrame.setVisible(true);
 		}
 
 	}
