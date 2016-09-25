@@ -13,7 +13,7 @@ public class Control {
 	static LoadingScreen loadFrame;
 	static Scores scoreFrame;
 	static GameFrame gameJFrame;
-	static pauseScreen pauseFrame;
+	static PauseScreen pauseFrame;
 	static CompleteScreen completeFrame;
 	static LoseScreen loseFrame;
 	

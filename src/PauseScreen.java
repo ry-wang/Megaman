@@ -17,14 +17,14 @@ import javax.swing.JButton;
  * September 2016
  */
 
-public class pauseScreen extends JFrame implements ActionListener {
+public class PauseScreen extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private int menu;
 	private int exit;
 	Runnable tempApplet;
 
-	public pauseScreen(Runnable input) {
+	public PauseScreen(Runnable input) {
 		GameFrame.audioClip.stop();
 		tempApplet = input;
 		

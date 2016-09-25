@@ -5,59 +5,47 @@ import java.awt.Graphics;
 /**
  * @ Description: Shot class, used for creating the player shots
  * @ Author: Ryan Wang
- * @ Version: v1.0
- * June 12th, 2015
+ * @ Version: v2.0
+ * September 2016
  */
 
-public class shot {
+public class shot extends Object {
 
-	//Variables to hold data 
-	private int xPosition;
-	private int yPosition;
-	private int speed = 20;
 	private int radius;
 	private String direction;
 
-	//Constructor for shot class, sets data received to variables in this class
-	shot (int x, int y, int r, String directionInput) {
-		xPosition = x;
-		yPosition = y;
+	shot(int x, int y, int r, String directionInput) {
+		super(x, y);
 		radius = r;
 		direction = directionInput;
 	}
 
-	//Move shot method, based on direction
 	public void moveShot() {
+		final int speed = 20;
 		if (direction.equalsIgnoreCase("Right")) {
-			xPosition += speed;
+			x += speed;
+		} else {
+			x -= speed;
 		}
-		else {
-			xPosition -= speed;
-		}
-	}//End moveShot method
+	}
 
-	//Method that gets direction of shot
 	public String getDirection() {
 		return direction;
-	}//End getDirection method
-	
-	//Method for getting x Position
+	}
+
 	public int getX() {
-		return xPosition;
-	}//end getX method
+		return x;
+	}
 
-	//Method for getting y Position
+
 	public int getY() {
-		return yPosition;
-	}//end getY method
+		return y;
+	}
 
-	//Paint class for drawing shots
 	public void paintShot (Graphics g)  {
 
-		//Sets color to red, draws a circle at the spacecraft's x and y position
 		g.setColor(Color.BLUE);
-		g.fillOval(xPosition, yPosition, radius, radius);
+		g.fillOval(x, y, radius, radius);
 
-	}//End paint method
-
-}//End shot class
+	}
+}

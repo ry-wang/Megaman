@@ -15,7 +15,7 @@ public class Game extends Applet implements Runnable {
 
 	static Thread th;
 
-	private player megaMan;
+	private Player megaMan;
 	private Rectangle playerBox;
 	private Rectangle playerCollisionBox;
 
@@ -39,7 +39,7 @@ public class Game extends Applet implements Runnable {
 	private platforms platformArray[];
 	private Rectangle platformBoxes[];
 
-	private enemy enemyArray[];
+	private Enemy enemyArray[];
 	private Rectangle enemyHitBox[];
 	private Rectangle enemyWallCollisionBox[];
 
@@ -79,13 +79,13 @@ public class Game extends Applet implements Runnable {
 		platformBoxes = new Rectangle[5];
 		generatePlatforms();
 
-		enemyArray = new enemy[4];
+		enemyArray = new Enemy[4];
 		enemyHitBox = new Rectangle[4];
 		enemyWallCollisionBox = new Rectangle[9];
 		generateEnemyWalls();
 		generateEnemy(0);
 
-		megaMan = new player(20, 270, 100, "Still", "Right");
+		megaMan = new Player(20, 270, 100, "Still", "Right");
 		megaMan.setOnGround(true);
 		playerBox = new Rectangle(20, 270, 30, 34);
 		playerCollisionBox = new Rectangle(45, 329);
@@ -195,6 +195,7 @@ public class Game extends Applet implements Runnable {
 						}
 					}
 				}
+
 				//If timer for 2nd turret is >= 60, initializes a new shot and its rectangle
 				if (turret2ShotTimer >= 60) {
 					turret2ShotTimer = 0;
@@ -206,40 +207,35 @@ public class Game extends Applet implements Runnable {
 						}
 					}
 				}
-			}
-			else {
+			} else {
 				turretShotNum = 0;
 			}
 
 			//Player with platform collision testing
-			//For loop that runs through all the platforms
 			for (int i = 0; i < platformBoxes.length; i++) {
 				if (platformBoxes[i] != null) {
 					//If playerBox intersects any wall, sets the y value of player so that it's on top of platform
 					if (playerBox.intersects(platformBoxes[i])) {
 						megaMan.setOnGround(true);
 						intersecting = true;
-						if ((megaMan.isDown() == true) ||((megaMan.isDown() == false) && (megaMan.isDown() == false))) {
+						if ((megaMan.isDown()) ||(!megaMan.isDown())) {
 							megaMan.setY(platformBoxes[i].y - 48);
 						}
 					}
 				}
-			}//End for loop
+			}
 
 			//Turret shot with player and frame collision
-			//For loop that runs through each non-null shot object
 			for (int i = 0; i < turretShotArray.length; i++) {
 				if (turretShotArray[i] != null) {
-					//Moves the shot
 					turretShotArray[i].moveShot();
-					//If shot hits player, sets to null, player loses health
+
 					if (turretShotArrayBox[i].intersects(playerBox)) {
 						megaMan.setHealth(megaMan.getHealth() - 5);
 						turretShotArray[i] = null;
 						turretShotArrayBox[i] = null;
 					}
 					else {
-						//Based on direction, if it hits either the left, right, or top wall, shot and its rectangle become null
 						if (turretShotArray[i].getDirection().equalsIgnoreCase("Left")) {
 							if (turretShotArray[i].getX() < 5) {
 								turretShotArray[i] = null;
@@ -260,25 +256,20 @@ public class Game extends Applet implements Runnable {
 						}
 					}
 				}
-			}//End for loop
+			}
 
-			//Testing for if player collects health pack
 			if ((healthPackBox != null) && (healthBoost != null)) {
 				if (playerBox.intersects(healthPackBox)) {
-					//Max health is 100, so if current health + 10 > 100, health is set to 100
 					if ((megaMan.getHealth() + 10) <= 100) {
 						megaMan.setHealth(megaMan.getHealth() + 15);
-					}
-					else {
+					} else {
 						megaMan.setHealth(100);
 					}
-					//Objects become null
 					healthBoost = null;
 					healthPackBox = null;
 				}
 			}
 
-			//Calls methods that are responsible for everything in the program running
 			enemyMovement();
 			shotMoveCollisionTest();
 			onGroundCollisionTest();
@@ -292,7 +283,7 @@ public class Game extends Applet implements Runnable {
 				time++;
 				timer = 0;
 			}
-			//If player reaches a certain spot, next level starts and method which sets that up is called
+
 			if (level == 1) {
 				if ((megaMan.getX() >= 960) && (megaMan.getY() < 200)) {
 					level++;
@@ -315,7 +306,6 @@ public class Game extends Applet implements Runnable {
 				}
 			}
 
-			//Calls repaint 
 			this.repaint();
 
 			//Makes thread sleep before rerunning loop
@@ -380,7 +370,7 @@ public class Game extends Applet implements Runnable {
 			}
 		}
 		else if (key == Event.ESCAPE) {
-			Control.pauseFrame = new pauseScreen(this);
+			Control.pauseFrame = new PauseScreen(this);
 			Control.pauseFrame.setVisible(true);
 			stop();
 		}
@@ -478,7 +468,7 @@ public class Game extends Applet implements Runnable {
 
 				for (int k = 0; k < enemyWallCollisionBox.length; k++) {
 					if (enemyHitBox[i].intersects(enemyWallCollisionBox[k])) {
-						if (enemyArray[i].getIntersectsWall()) {
+						if (!enemyArray[i].getIntersectsWall()) {
 							enemyArray[i].setIntersectsWall(true);
 							if (enemyArray[i].getState().equalsIgnoreCase("Walk Right")) {
 								enemyArray[i].setState("Walk Left");
@@ -731,7 +721,7 @@ public class Game extends Applet implements Runnable {
 
 	private void generateEnemy(int i) {
 		if (i < enemyArray.length) {
-			enemyArray[i] = new enemy(level);
+			enemyArray[i] = new Enemy(level);
 			enemyHitBox[i] = new Rectangle(enemyArray[i].getX(), enemyArray[i].getY());
 			i++;
 			generateEnemy(i);
