@@ -1,3 +1,5 @@
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.EventQueue;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -14,8 +16,6 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URL;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
@@ -26,11 +26,11 @@ import javax.swing.JButton;
  * September 2016
  */
 
-public class credits extends JFrame implements ActionListener {
+public class Credits extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private int exit;
-	private Clip audioClip;
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/creditsAudio.wav"));
 
 	private Font creditsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
 
@@ -38,7 +38,7 @@ public class credits extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					credits frame = new credits();
+					Credits frame = new Credits();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class credits extends JFrame implements ActionListener {
 		});
 	}
 
-	public credits() {
+	public Credits() {
 		setTitle("Credits");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
@@ -116,18 +116,10 @@ public class credits extends JFrame implements ActionListener {
 		contentPane.add(btnExit);
 
 		try {
-			URL url = this.getClass().getResource("music/creditsAudio.wav");
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-			audioClip = AudioSystem.getClip();
-			audioClip.open(audioIn);
-			audioClip.start();
-			audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+			audioClip.loop();
 		}
-		catch (IOException e) {	
-		}
-		catch (UnsupportedAudioFileException e) {	
-		}
-		catch (LineUnavailableException e) {	
+		catch (Exception e) {
+			System.out.println("Error loading music");
 		}
 	}
 

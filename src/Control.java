@@ -8,7 +8,7 @@
 public class Control {
 	
 	static Menu menuFrame;
-	static credits creditFrame;
+	static Credits creditFrame;
 	static Instructions instFrame;
 	static LoadingScreen loadFrame;
 	static Scores scoreFrame;

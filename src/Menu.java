@@ -121,7 +121,7 @@ public class Menu extends JFrame implements ActionListener {
 		if (evt.getActionCommand().equals("Credits")) {
 			audioClip.stop();
 			this.dispose();
-			Control.creditFrame = new credits();
+			Control.creditFrame = new Credits();
 			Control.creditFrame.setVisible(true);
 		}
 		if (evt.getActionCommand().equals("Play")) {

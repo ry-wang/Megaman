@@ -1,4 +1,3 @@
-//Imports needed
 import java.awt.Graphics;
 import java.io.IOException;
 
@@ -22,8 +21,7 @@ public class Turret extends Object{
 		direction = d;
 	}
 
-	//Method that paints the turret
-	public void paintTurrets(Graphics g) {
+	protected void paintTurrets(Graphics g) {
 		try {
 			//Paints different turrets based on direction and type
 			if (type == 1) {

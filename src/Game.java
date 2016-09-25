@@ -26,7 +26,7 @@ public class Game extends Applet implements Runnable {
 	private int level = 1;
 
 	private Turret turretArray[];
-	private turretShot turretShotArray[];
+	private TurretShot turretShotArray[];
 	private Rectangle turretShotArrayBox[];
 	private int turretShotNum = 0;
 	private int turret1ShotTimer = 0;
@@ -36,14 +36,14 @@ public class Game extends Applet implements Runnable {
 	private Shot playerShotArray[];
 	private Rectangle playerShotArrayBox[];
 
-	private platforms platformArray[];
+	private Platforms platformArray[];
 	private Rectangle platformBoxes[];
 
 	private Enemy enemyArray[];
 	private Rectangle enemyHitBox[];
 	private Rectangle enemyWallCollisionBox[];
 
-	private background walls[];
+	private Background walls[];
 	private Rectangle wallBoxes[];
 
 	private boolean intersecting;
@@ -54,7 +54,7 @@ public class Game extends Applet implements Runnable {
 	private healthPack healthBoost;
 	private Rectangle healthPackBox;
 
-	private BufferedImage background;
+	private BufferedImage Background;
 
 	// double buffering
 	private Image dbImage;
@@ -64,18 +64,18 @@ public class Game extends Applet implements Runnable {
 		this.resize(1000, 400);
 
 		turretArray = new Turret[2];
-		turretShotArray = new turretShot[12];
+		turretShotArray = new TurretShot[12];
 		turretShotArrayBox = new Rectangle[12];
 		generateTurrets();
 
-		walls = new background[32];
+		walls = new Background[32];
 		wallBoxes = new Rectangle[32];
 		createWalls();
 
 		playerShotArray = new Shot[5];
 		playerShotArrayBox = new Rectangle[5];
 
-		platformArray = new platforms[5];
+		platformArray = new Platforms[5];
 		platformBoxes = new Rectangle[5];
 		generatePlatforms();
 
@@ -94,10 +94,10 @@ public class Game extends Applet implements Runnable {
 		healthPackBox = new Rectangle(healthBoost.getX(), healthBoost.getY(), 22, 15);
 
 		try {
-			background = ImageIO.read((this.getClass().getResource("/images/background.png")));
+			Background = ImageIO.read((this.getClass().getResource("/images/background.png")));
 		}
 		catch (IOException e) {
-			System.out.println("Error loading background");
+			System.out.println("Error loading Background");
 		}
 	}
 
@@ -182,13 +182,13 @@ public class Game extends Applet implements Runnable {
 						if (turretShotArray[turretShotNum] == null) {
 							//Shots have different properties based on which level player is on
 							if (level == 1) {
-								turretShotArray[turretShotNum] = new turretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Left");
+								turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Left");
 							}
 							if (level == 2) {
-								turretShotArray[turretShotNum] = new turretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Left");
+								turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Left");
 							}
 							if (level == 3) {
-								turretShotArray[turretShotNum] = new turretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Right");
+								turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Right");
 							}
 							turretShotArrayBox[turretShotNum] = new Rectangle(turretShotArray[turretShotNum].getX(), turretShotArray[turretShotNum].getY(), turretShotRadius, turretShotRadius);
 							turretShotNum++;
@@ -201,7 +201,7 @@ public class Game extends Applet implements Runnable {
 					turret2ShotTimer = 0;
 					if (turretArray[1] != null) {
 						if (turretShotArray[turretShotNum] == null) {
-							turretShotArray[turretShotNum] = new turretShot(turretArray[1].getX() + 15, turretArray[1].getY() - 2, turretShotRadius, "Up");
+							turretShotArray[turretShotNum] = new TurretShot(turretArray[1].getX() + 15, turretArray[1].getY() - 2, turretShotRadius, "Up");
 							turretShotArrayBox[turretShotNum] = new Rectangle(turretShotArray[turretShotNum].getX(), turretShotArray[turretShotNum].getY(), turretShotRadius, turretShotRadius);
 							turretShotNum++;
 						}
@@ -404,7 +404,7 @@ public class Game extends Applet implements Runnable {
 		g.drawString(String.valueOf(points), 250, 500);
 
 		this.resize(1000, 500);
-		g.drawImage(background, 0, 0, null);
+		g.drawImage(Background, 0, 0, null);
 
 		//Health bar
 		g.setColor(Color.green);
@@ -615,45 +615,45 @@ public class Game extends Applet implements Runnable {
 	}
 
 	private void createWalls() {
-		walls[0] = new background(0, 50, 92, 4, "Horizontal", "Top");
-		walls[1] = new background(92, 50, 4, 40, "Vertical", "Top");
-		walls[2] = new background(92, 90, 50, 4, "Horizontal", "Top");
-		walls[3] = new background(142, 50, 4, 44, "Vertical", "Top");
+		walls[0] = new Background(0, 50, 92, 4, "Horizontal", "Top");
+		walls[1] = new Background(92, 50, 4, 40, "Vertical", "Top");
+		walls[2] = new Background(92, 90, 50, 4, "Horizontal", "Top");
+		walls[3] = new Background(142, 50, 4, 44, "Vertical", "Top");
 
-		walls[4] = new background(142, 50, 100, 4, "Horizontal", "Top");
-		walls[5] = new background(241, 50, 4, 40, "Vertical", "Top");
-		walls[6] = new background(241, 90, 50, 4, "Horizontal", "Top");
-		walls[7] = new background(291, 50, 4, 44, "Vertical", "Top");
+		walls[4] = new Background(142, 50, 100, 4, "Horizontal", "Top");
+		walls[5] = new Background(241, 50, 4, 40, "Vertical", "Top");
+		walls[6] = new Background(241, 90, 50, 4, "Horizontal", "Top");
+		walls[7] = new Background(291, 50, 4, 44, "Vertical", "Top");
 
-		walls[8] = new background(295, 50, 187, 4, "Horizontal", "Top");
-		walls[9] = new background(482, 50, 4, 40, "Vertical", "Top");
-		walls[10] = new background(482, 90, 50, 4, "Horizontal", "Top");
-		walls[11] = new background(532, 50, 4, 44, "Vertical", "Top");
+		walls[8] = new Background(295, 50, 187, 4, "Horizontal", "Top");
+		walls[9] = new Background(482, 50, 4, 40, "Vertical", "Top");
+		walls[10] = new Background(482, 90, 50, 4, "Horizontal", "Top");
+		walls[11] = new Background(532, 50, 4, 44, "Vertical", "Top");
 
-		walls[12] = new background(536, 50, 96, 4, "Horizontal", "Top");
-		walls[13] = new background(632, 50, 4, 40, "Vertical", "Top");
-		walls[14] = new background(632, 90, 50, 4, "Horizontal", "Top");
-		walls[15] = new background(682, 50, 4, 44, "Vertical", "Top");
+		walls[12] = new Background(536, 50, 96, 4, "Horizontal", "Top");
+		walls[13] = new Background(632, 50, 4, 40, "Vertical", "Top");
+		walls[14] = new Background(632, 90, 50, 4, "Horizontal", "Top");
+		walls[15] = new Background(682, 50, 4, 44, "Vertical", "Top");
 
-		walls[16] = new background(682, 50, 187, 4, "Horizontal", "Top");
-		walls[17] = new background(869, 50, 4, 40, "Vertical", "Top");
-		walls[18] = new background(869, 90, 50, 4, "Horizontal", "Top");
-		walls[19] = new background(919, 50, 4, 44, "Vertical", "Top");
-		walls[20] = new background(919, 50, 81, 4, "Horizontal", "Top");
+		walls[16] = new Background(682, 50, 187, 4, "Horizontal", "Top");
+		walls[17] = new Background(869, 50, 4, 40, "Vertical", "Top");
+		walls[18] = new Background(869, 90, 50, 4, "Horizontal", "Top");
+		walls[19] = new Background(919, 50, 4, 44, "Vertical", "Top");
+		walls[20] = new Background(919, 50, 81, 4, "Horizontal", "Top");
 
-		walls[21] = new background(0, 334, 87, 100, "Horizontal", "Bottom");
-		walls[22] = new background(92, 338, 4, 43, "Vertical", "Bottom");
-		walls[23] = new background(92, 377, 200, 80, "Horizontal", "Bottom");
-		walls[24] = new background(288, 338, 4, 47, "Vertical", "Bottom");
+		walls[21] = new Background(0, 334, 87, 100, "Horizontal", "Bottom");
+		walls[22] = new Background(92, 338, 4, 43, "Vertical", "Bottom");
+		walls[23] = new Background(92, 377, 200, 80, "Horizontal", "Bottom");
+		walls[24] = new Background(288, 338, 4, 47, "Vertical", "Bottom");
 
-		walls[25] = new background(288, 334, 188, 100, "Horizontal", "Bottom");
-		walls[26] = new background(482, 338, 4, 43, "Vertical", "Bottom");
-		walls[27] = new background(482, 377, 200, 80, "Horizontal", "Bottom");
-		walls[28] = new background(680, 338, 4, 47, "Vertical", "Bottom");
+		walls[25] = new Background(288, 334, 188, 100, "Horizontal", "Bottom");
+		walls[26] = new Background(482, 338, 4, 43, "Vertical", "Bottom");
+		walls[27] = new Background(482, 377, 200, 80, "Horizontal", "Bottom");
+		walls[28] = new Background(680, 338, 4, 47, "Vertical", "Bottom");
 
-		walls[29] = new background(680, 334, 188, 100, "Horizontal", "Bottom");
-		walls[30] = new background(874, 338, 4, 43, "Vertical", "Bottom");
-		walls[31] = new background(874, 377, 200, 40, "Horizontal", "Bottom");
+		walls[29] = new Background(680, 334, 188, 100, "Horizontal", "Bottom");
+		walls[30] = new Background(874, 338, 4, 43, "Vertical", "Bottom");
+		walls[31] = new Background(874, 377, 200, 40, "Horizontal", "Bottom");
 
 		for (int i = 0; i < wallBoxes.length; i++) {
 			wallBoxes[i] = new Rectangle(walls[i].getX(), walls[i].getY(), walls[i].getWidth(), walls[i].getHeight());
@@ -690,28 +690,28 @@ public class Game extends Applet implements Runnable {
 
 	private void generatePlatforms() {
 		if (level == 1) {
-			platformArray[0] = new platforms(0, 175, 100);
-			platformArray[1] = new platforms(95, 270, 200);
-			platformArray[2] = new platforms(345, 200, 175);
-			platformArray[3] = new platforms(600, 225, 200);
-			platformArray[4] = new platforms(850, 165, 150);
+			platformArray[0] = new Platforms(0, 175, 100);
+			platformArray[1] = new Platforms(95, 270, 200);
+			platformArray[2] = new Platforms(345, 200, 175);
+			platformArray[3] = new Platforms(600, 225, 200);
+			platformArray[4] = new Platforms(850, 165, 150);
 		}
 		else if (level == 2) {
 			platformBoxes = new Rectangle[4];
-			platformArray = new platforms[4];
-			platformArray[0] = new platforms(0, 150, 100);
-			platformArray[1] = new platforms(510, 270, 175);
-			platformArray[2] = new platforms(125, 270, 175);
-			platformArray[3] = new platforms(850, 150, 150);
+			platformArray = new Platforms[4];
+			platformArray[0] = new Platforms(0, 150, 100);
+			platformArray[1] = new Platforms(510, 270, 175);
+			platformArray[2] = new Platforms(125, 270, 175);
+			platformArray[3] = new Platforms(850, 150, 150);
 		}
 		else if (level == 3) {
 			platformBoxes = new Rectangle[5];
-			platformArray = new platforms[5];
-			platformArray[0] = new platforms(0, 175, 100);
-			platformArray[1] = new platforms(95, 270, 200);
-			platformArray[2] = new platforms(345, 200, 175);
-			platformArray[3] = new platforms(600, 225, 200);
-			platformArray[4] = new platforms(850, 185, 150);
+			platformArray = new Platforms[5];
+			platformArray[0] = new Platforms(0, 175, 100);
+			platformArray[1] = new Platforms(95, 270, 200);
+			platformArray[2] = new Platforms(345, 200, 175);
+			platformArray[3] = new Platforms(600, 225, 200);
+			platformArray[4] = new Platforms(850, 185, 150);
 		}
 
 		for (int i = 0; i < platformBoxes.length; i++) {

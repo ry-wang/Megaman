@@ -10,15 +10,15 @@ public abstract class Object {
     protected int x;
     protected int y;
 
-    public Object(int x, int y) {
+    protected Object(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    protected int getX() {
         return x;
     }
-    public int getY() {
+    protected int getY() {
         return y;
     }
 

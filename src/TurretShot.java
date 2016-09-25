@@ -2,38 +2,46 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * @ Description: Shot class, used for creating the player shots
+ * @ Description: TurretShot class, used for creating the turret shots
  * @ Author: Ryan Wang
  * @ Version: v2.0
  * September 2016
  */
 
-public class Shot extends Object {
+
+public class TurretShot extends Object{
 
 	private int radius;
 	private String direction;
 
-	Shot(int x, int y, int r, String directionInput) {
+	TurretShot (int x, int y, int r, String directionInput) {
 		super(x, y);
 		radius = r;
 		direction = directionInput;
 	}
 
 	protected void moveShot() {
-		final int speed = 20;
+		int speed = 10;
 		if (direction.equalsIgnoreCase("Right")) {
 			x += speed;
-		} else {
+		}
+		else if (direction.equalsIgnoreCase("Left")) {
 			x -= speed;
 		}
+		else {
+			y -= speed;
+		}
 	}
+
 
 	protected String getDirection() {
 		return direction;
 	}
 
 	protected void paintShot (Graphics g)  {
-		g.setColor(Color.BLUE);
+		g.setColor(Color.RED);
 		g.fillOval(x, y, radius, radius);
+
 	}
+
 }

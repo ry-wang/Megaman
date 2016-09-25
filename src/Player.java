@@ -32,104 +32,104 @@ public class Player extends Object {
 		characterDirection = direction;
 	}
 
-	public boolean isDown() {
+	protected boolean isDown() {
 		return movingDown;
 	}
 
-	public void setUpDown(boolean input1, boolean input2) {
+	protected void setUpDown(boolean input1, boolean input2) {
 		movingUp = input1;
 		movingDown = input2;
 	}
 
-	public void setRunning(boolean input) {
+	protected void setRunning(boolean input) {
 		isRunning = input;
 	}
-	
-	public boolean isRunning() {
+
+	protected boolean isRunning() {
 		return isRunning;
 	}
-	
-	public void setBulletCount(int input) {
+
+	protected void setBulletCount(int input) {
 		bulletCount = input;
 	}
-	
-	public int getBulletCount() {
+
+	protected int getBulletCount() {
 		return bulletCount;
 	}
 
-	public int getHealth() {
+	protected int getHealth() {
 		return health;
 	}
 
-	public void setHealth(int input) {
+	protected void setHealth(int input) {
 		health = input;
 	}
 
-	public void setX(int input) {
+	protected void setX(int input) {
 		x = input;
 	}
-	
-	public void setY(int input) {
+
+	protected void setY(int input) {
 		y = input;
 	}
 
-	public void setState(String input) {
+	protected void setState(String input) {
 		characterState = input;
 	}
 
-	public void setDirection(String input) {
+	protected void setDirection(String input) {
 		characterDirection = input;
 	}
 
-	public boolean isJumping() {
+	protected boolean isJumping() {
 		return isJumping;
 	}
-	
-	public void setJumping(boolean input) {
+
+	protected void setJumping(boolean input) {
 		isJumping = input;
 	}
-	
-	public boolean onGround() {
+
+	protected boolean onGround() {
 		return onGround;
 	}
-	
-	public void setOnGround(boolean input) {
+
+	protected void setOnGround(boolean input) {
 		onGround = input;
 	}
 
-	public String getState() {
+	protected String getState() {
 		return characterState;
 	}
 
-	public String getDirection() {
+	protected String getDirection() {
 		return characterDirection;
 	}
 
-	public void setImageNum(int input) {
+	protected void setImageNum(int input) {
 		imageNum = input;
 	}
-	
-	public int getImageNum() {
+
+	protected int getImageNum() {
 		return imageNum;
 	}
-	
-	public void moveRight() {
+
+	protected void moveRight() {
 		x += xSpeed;
 	}
-	
-	public void moveLeft() {
+
+	protected void moveLeft() {
 		x -= xSpeed;
 	}
-	
-	public void moveUp() {
+
+	protected void moveUp() {
 		y -= ySpeed;
 	}
-	
-	public void moveDown() {
+
+	protected void moveDown() {
 		y += ySpeed;
 	}
 
-	public void paintPlayer (Graphics g)  {
+	protected void paintPlayer (Graphics g)  {
 		if (characterState.equalsIgnoreCase("Still")) {
 			try {
 				if (characterDirection.equalsIgnoreCase("Right")) {
