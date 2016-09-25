@@ -1,4 +1,3 @@
-//Imports needed
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -9,12 +8,12 @@ import java.awt.Graphics;
  * September 2016
  */
 
-public class shot extends Object {
+public class Shot extends Object {
 
 	private int radius;
 	private String direction;
 
-	shot(int x, int y, int r, String directionInput) {
+	Shot(int x, int y, int r, String directionInput) {
 		super(x, y);
 		radius = r;
 		direction = directionInput;
@@ -33,19 +32,8 @@ public class shot extends Object {
 		return direction;
 	}
 
-	public int getX() {
-		return x;
-	}
-
-
-	public int getY() {
-		return y;
-	}
-
 	public void paintShot (Graphics g)  {
-
 		g.setColor(Color.BLUE);
 		g.fillOval(x, y, radius, radius);
-
 	}
 }

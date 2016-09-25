@@ -7,8 +7,8 @@ import javax.imageio.ImageIO;
 /**
  * @ Description: Main applet class for summative game, controls activity that happens in other classes related to the game
  * @ Author: Ryan Wang
- * @ Version: v1.0
- * June 13th, 2015
+ * @ Version: v2.0
+ * September 2016
  */
 
 public class Game extends Applet implements Runnable {
@@ -25,7 +25,7 @@ public class Game extends Applet implements Runnable {
 	static int health;
 	private int level = 1;
 
-	private turret turretArray[];
+	private Turret turretArray[];
 	private turretShot turretShotArray[];
 	private Rectangle turretShotArrayBox[];
 	private int turretShotNum = 0;
@@ -33,7 +33,7 @@ public class Game extends Applet implements Runnable {
 	private int turret2ShotTimer = 0;
 	private int turretShotRadius = 10;
 
-	private shot playerShotArray[];
+	private Shot playerShotArray[];
 	private Rectangle playerShotArrayBox[];
 
 	private platforms platformArray[];
@@ -63,7 +63,7 @@ public class Game extends Applet implements Runnable {
 	public void init()  {
 		this.resize(1000, 400);
 
-		turretArray = new turret[2];
+		turretArray = new Turret[2];
 		turretShotArray = new turretShot[12];
 		turretShotArrayBox = new Rectangle[12];
 		generateTurrets();
@@ -72,7 +72,7 @@ public class Game extends Applet implements Runnable {
 		wallBoxes = new Rectangle[32];
 		createWalls();
 
-		playerShotArray = new shot[5];
+		playerShotArray = new Shot[5];
 		playerShotArrayBox = new Rectangle[5];
 
 		platformArray = new platforms[5];
@@ -344,10 +344,10 @@ public class Game extends Applet implements Runnable {
 				}
 
 				if (megaMan.getDirection().equalsIgnoreCase("Right")) {
-					playerShotArray[playerShotNum] = new shot(megaMan.getX() + 30, megaMan.getY() + 15, playerShotRadius, megaMan.getDirection());
+					playerShotArray[playerShotNum] = new Shot(megaMan.getX() + 30, megaMan.getY() + 15, playerShotRadius, megaMan.getDirection());
 					playerShotArrayBox[playerShotNum] = new Rectangle(megaMan.getX() + 30, megaMan.getY() + 15, playerShotRadius, playerShotRadius);
 				} else {
-					playerShotArray[playerShotNum] = new shot(megaMan.getX(), megaMan.getY() + 15, playerShotRadius, megaMan.getDirection());
+					playerShotArray[playerShotNum] = new Shot(megaMan.getX(), megaMan.getY() + 15, playerShotRadius, megaMan.getDirection());
 					playerShotArrayBox[playerShotNum] = new Rectangle(megaMan.getX(), megaMan.getY() + 15, playerShotRadius, playerShotRadius);
 				}
 
@@ -730,16 +730,16 @@ public class Game extends Applet implements Runnable {
 
 	private void generateTurrets() {
 		if (level == 1) {
-			turretArray[0] = new turret(772, 210, 1, "Left");
-			turretArray[1] = new turret(905, 145, 2, "Up");
+			turretArray[0] = new Turret(772, 210, 1, "Left");
+			turretArray[1] = new Turret(905, 145, 2, "Up");
 		}
 		else if (level == 2) {
-			turretArray[0] = new turret(950, 135, 1, "Left");
+			turretArray[0] = new Turret(950, 135, 1, "Left");
 			turretArray[1] = null;
 		}
 		else if (level == 3) {
-			turretArray[0] = new turret(75, 160, 1, "Right");
-			turretArray[1] = new turret(295, 320, 2, "Up");
+			turretArray[0] = new Turret(75, 160, 1, "Right");
+			turretArray[1] = new Turret(295, 320, 2, "Up");
 		}
 	}
 
