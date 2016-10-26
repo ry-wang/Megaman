@@ -22,7 +22,7 @@ import javax.swing.JButton;
 
 public class LoseScreen extends JFrame implements ActionListener {
 
-	final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/loseScreenAudio.wav"));
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/loseScreenAudio.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

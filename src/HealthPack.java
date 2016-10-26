@@ -9,37 +9,27 @@ import javax.imageio.ImageIO;
  * September 2016
  */
 
-public class healthPack {
-	
-	private int xPosition;
-	private int yPosition;
+public class HealthPack extends Object {
 
-	healthPack(int level) {
+	HealthPack(int level) {
+		super(0, 0);
 		if (level == 1) {
-			xPosition = 20;
-			yPosition = 162;
+			x = 20;
+			y = 162;
 		}
 		else if (level == 2) {
-			xPosition = 370;
-			yPosition = 323;
+			x = 370;
+			y = 323;
 		}
 		else if (level == 3) {
-			xPosition = 20;
-			yPosition = 162;
+			x = 20;
+			y = 162;
 		}
-	}
-
-	public int getX() {
-		return xPosition;
-	}
-
-	public int getY() {
-		return yPosition;
 	}
 
 	public void paintPack(Graphics g) {
 		try {
-			g.drawImage(ImageIO.read((this.getClass().getResource("/images/healthBoost.png"))), xPosition, yPosition, null);
+			g.drawImage(ImageIO.read((this.getClass().getResource("/images/healthBoost.png"))), x, y, null);
 		}
 		catch (IOException e) {
 			System.out.println("error");

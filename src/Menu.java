@@ -24,11 +24,7 @@ import java.awt.event.ActionListener;
 public class Menu extends JFrame implements ActionListener {
 
 	static String name;
-    private final Font menuFont = new Font("SWTOR Trajan", Font.PLAIN, 18);
     private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/menuAudio.wav"));
-	private JPanel contentPane;
-	private int exit;
-	private int play;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,6 +40,9 @@ public class Menu extends JFrame implements ActionListener {
 	}
 
 	public Menu() {
+		final Font menuFont = new Font("SWTOR Trajan", Font.PLAIN, 18);
+		final JPanel contentPane;
+
 		setTitle("Megaman X");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 550);
@@ -112,20 +111,20 @@ public class Menu extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent evt) {
-		if (evt.getActionCommand().equals ("Instructions")) {
+		if (evt.getActionCommand().equals("Instructions")) {
 			audioClip.stop();
 			this.dispose();
 			Control.instFrame = new Instructions();
 			Control.instFrame.setVisible(true);
 		}
-		if (evt.getActionCommand().equals("Credits")) {
+		else if (evt.getActionCommand().equals("Credits")) {
 			audioClip.stop();
 			this.dispose();
 			Control.creditFrame = new Credits();
 			Control.creditFrame.setVisible(true);
 		}
-		if (evt.getActionCommand().equals("Play")) {
-			play = JOptionPane.showConfirmDialog(null, "Have you read the instructions?");
+		else if (evt.getActionCommand().equals("Play")) {
+			int play = JOptionPane.showConfirmDialog(null, "Have you read the instructions?");
 			if (play == 0) {
 				name = JOptionPane.showInputDialog("Please enter your name: ");
 				if (name != null) {
@@ -135,20 +134,20 @@ public class Menu extends JFrame implements ActionListener {
 					Control.loadFrame.setVisible(true);
 				}
 			}
-			if (play == 1) {
+			else if (play == 1) {
 				audioClip.stop();
 				this.dispose();
 				Control.instFrame = new Instructions();
 				Control.instFrame.setVisible(true);
 			}
 		}
-		if (evt.getActionCommand().equals ("Exit")) {
-			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
+		else if (evt.getActionCommand().equals("Exit")) {
+			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 			if (exit == 0) {
 				System.exit(0);
 			}
 		}
-		if (evt.getActionCommand().equals ("Scores")) {
+		else if (evt.getActionCommand().equals("Scores")) {
 			audioClip.stop();
 			this.dispose();
 			Control.scoreFrame = new Scores();

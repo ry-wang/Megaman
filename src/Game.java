@@ -51,7 +51,7 @@ public class Game extends Applet implements Runnable {
 	private int playerShotNum = 0;
 	private int playerShotRadius = 10;
 
-	private healthPack healthBoost;
+	private HealthPack healthBoost;
 	private Rectangle healthPackBox;
 
 	private BufferedImage Background;
@@ -61,7 +61,7 @@ public class Game extends Applet implements Runnable {
 	private Graphics dbg;
 
 	public void init()  {
-		this.resize(1000, 400);
+		this.resize(1000, 500);
 
 		turretArray = new Turret[2];
 		turretShotArray = new TurretShot[12];
@@ -90,7 +90,7 @@ public class Game extends Applet implements Runnable {
 		playerBox = new Rectangle(20, 270, 30, 34);
 		playerCollisionBox = new Rectangle(45, 329);
 
-		healthBoost = new healthPack(level);
+		healthBoost = new HealthPack(level);
 		healthPackBox = new Rectangle(healthBoost.getX(), healthBoost.getY(), 22, 15);
 
 		try {
@@ -128,7 +128,7 @@ public class Game extends Applet implements Runnable {
 				megaMan.setUpDown(false, false);
 			}
 
-			if (megaMan.getState().equalsIgnoreCase("Run")) {
+			else if (megaMan.getState().equalsIgnoreCase("Run")) {
 				if (!megaMan.isJumping()) {
 					megaMan.setOnGround(true);
 				} else {
@@ -142,7 +142,7 @@ public class Game extends Applet implements Runnable {
 				}
 			}
 
-			if (megaMan.getState().equalsIgnoreCase("Jump")) {
+			else if (megaMan.getState().equalsIgnoreCase("Jump")) {
 				megaMan.setY(megaMan.getY() - 5);
 				megaMan.setOnGround(false);
 				//If the imageNum in the jump animation is less than 5, player moves up
@@ -154,7 +154,7 @@ public class Game extends Applet implements Runnable {
 				}
 			}
 
-			if (megaMan.getState().equalsIgnoreCase("Jump Move")) {
+			else if (megaMan.getState().equalsIgnoreCase("Jump Move")) {
 				megaMan.setOnGround(false);
 				if (megaMan.getImageNum() < 5) {
 					moveUpLogic();
@@ -184,10 +184,10 @@ public class Game extends Applet implements Runnable {
 							if (level == 1) {
 								turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Left");
 							}
-							if (level == 2) {
+							else if (level == 2) {
 								turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Left");
 							}
-							if (level == 3) {
+							else if (level == 3) {
 								turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Right");
 							}
 							turretShotArrayBox[turretShotNum] = new Rectangle(turretShotArray[turretShotNum].getX(), turretShotArray[turretShotNum].getY(), turretShotRadius, turretShotRadius);
@@ -290,13 +290,13 @@ public class Game extends Applet implements Runnable {
 					resetNextLevel();
 				}
 			}
-			if (level == 2) {
+			else if (level == 2) {
 				if ((megaMan.getX() >= 960) && (megaMan.getY() > 330)) {
 					level++;
 					resetNextLevel();
 				}
 			}
-			if (level == 3) {
+			else if (level == 3) {
 				if ((megaMan.getX() >= 960) && (megaMan.getY() < 200)) {
 					Control.completeFrame = new CompleteScreen();
 					Control.completeFrame.setVisible(true);
@@ -313,6 +313,7 @@ public class Game extends Applet implements Runnable {
 				Thread.sleep(50);
 			}
 			catch (InterruptedException ex) {
+				System.out.println("Applet encountered error.");
 			}
 
 			Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
@@ -403,7 +404,7 @@ public class Game extends Applet implements Runnable {
 		g.drawString(String.valueOf(megaMan.getBulletCount()), 285, 475);
 		g.drawString(String.valueOf(points), 250, 500);
 
-		this.resize(1000, 500);
+		//this.resize(1000, 500);
 		g.drawImage(Background, 0, 0, null);
 
 		//Health bar
@@ -748,7 +749,7 @@ public class Game extends Applet implements Runnable {
 			megaMan.setX(20);
 			megaMan.setY(126);
 		}
-		if (level == 3) {
+		else if (level == 3) {
 			megaMan.setX(20);
 			megaMan.setY(300);
 		}
@@ -768,7 +769,7 @@ public class Game extends Applet implements Runnable {
 			}
 		}
 
-		healthBoost = new healthPack(level);
+		healthBoost = new HealthPack(level);
 		healthPackBox = new Rectangle(healthBoost.getX(), healthBoost.getY(), 22, 15);
 
 		generatePlatforms();
