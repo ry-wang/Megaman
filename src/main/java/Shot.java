@@ -1,5 +1,8 @@
+package main.java;
+
 import java.awt.Color;
 import java.awt.Graphics;
+import java.lang.*;
 
 /**
  * @ Description: Shot class, used for creating the player shots

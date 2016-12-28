@@ -1,5 +1,8 @@
+package main.java;
+
 import java.awt.Graphics;
 import java.io.IOException;
+import java.lang.*;
 
 import javax.imageio.ImageIO;
 
@@ -32,16 +35,16 @@ public class Platforms extends Object {
 	protected void paintPlatforms(Graphics g) {
 		try {
 			if (width == 100) {
-				g.drawImage(ImageIO.read((this.getClass().getResource("/images/platform1.png"))), getX(), getY(), null);
+				g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/platform1.png"))), getX(), getY(), null);
 			}
 			else if (width == 150) {
-				g.drawImage(ImageIO.read((this.getClass().getResource("/images/platform2.png"))), getX(), getY(), null);
+				g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/platform2.png"))), getX(), getY(), null);
 			}
 			else if (width == 175) {
-				g.drawImage(ImageIO.read((this.getClass().getResource("/images/platform3.png"))), getX(), getY(), null);
+				g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/platform3.png"))), getX(), getY(), null);
 			}
 			else if (width == 200) {
-				g.drawImage(ImageIO.read((this.getClass().getResource("/images/platform4.png"))), getX(), getY(), null);
+				g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/platform4.png"))), getX(), getY(), null);
 			}
 		}
 		catch (IOException e) {

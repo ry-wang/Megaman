@@ -1,3 +1,5 @@
+package main.java;
+
 import java.awt.Graphics;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -29,7 +31,7 @@ public class HealthPack extends Object {
 
 	public void paintPack(Graphics g) {
 		try {
-			g.drawImage(ImageIO.read((this.getClass().getResource("/images/healthBoost.png"))), x, y, null);
+			g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/healthBoost.png"))), x, y, null);
 		}
 		catch (IOException e) {
 			System.out.println("error");

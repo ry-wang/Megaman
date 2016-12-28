@@ -1,3 +1,5 @@
+package main.java;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.BorderLayout;
@@ -15,7 +17,6 @@ import javax.swing.border.EmptyBorder;
 
 public class GameFrame extends JFrame {
 
-	private JPanel contentPane;
 	static AudioClip audioClip;
 
 	public static void main(String[] args) {
@@ -32,6 +33,8 @@ public class GameFrame extends JFrame {
 	}
 
 	public GameFrame() {
+		JPanel contentPane;
+
 		setTitle("Megaman X");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
@@ -41,7 +44,7 @@ public class GameFrame extends JFrame {
 		setContentPane(contentPane);
 		
 		try {
-			audioClip = Applet.newAudioClip(this.getClass().getResource("music/gameAudio.wav"));
+			audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/gameAudio.wav"));
 			audioClip.loop();
 		}
 		catch (Exception e) {

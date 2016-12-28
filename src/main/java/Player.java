@@ -1,5 +1,8 @@
+package main.java;
+
 import java.awt.Graphics;
 import java.io.IOException;
+import java.lang.*;
 import javax.imageio.ImageIO;
 
 /**
@@ -133,9 +136,9 @@ public class Player extends Object {
 		if (characterState.equalsIgnoreCase("Still")) {
 			try {
 				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/S" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/S" + imageNum + ".png"))), x, y, null);
 				} else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/LS" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LS" + imageNum + ".png"))), x, y, null);
 				}
 				imageNum++;
 				if (imageNum == 4) {
@@ -149,9 +152,9 @@ public class Player extends Object {
 		if (characterState.equalsIgnoreCase("Run")) {
 			try {
 				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/R" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/R" + imageNum + ".png"))), x, y, null);
 				} else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/LR" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LR" + imageNum + ".png"))), x, y, null);
 				}
 				imageNum++;
 				if (imageNum == 12) {
@@ -165,10 +168,10 @@ public class Player extends Object {
 		if (characterState.equalsIgnoreCase("Jump")) {
 			try {
 				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/J" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/J" + imageNum + ".png"))), x, y, null);
 				}
 				else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/LJ" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LJ" + imageNum + ".png"))), x, y, null);
 				}
 				imageNum++;
 				if (imageNum == 9) {
@@ -184,10 +187,10 @@ public class Player extends Object {
 		if (characterState.equalsIgnoreCase("Jump Move")) {
 			try {
 				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/J" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/J" + imageNum + ".png"))), x, y, null);
 				}
 				else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/LJ" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LJ" + imageNum + ".png"))), x, y, null);
 				}
 				imageNum++;
 				if (imageNum == 9) {
@@ -203,9 +206,9 @@ public class Player extends Object {
 		if (characterState.equalsIgnoreCase("Shoot")) {
 			try {
 				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/SH" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/SH" + imageNum + ".png"))), x, y, null);
 				} else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/LSH" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LSH" + imageNum + ".png"))), x, y, null);
 				}
 				imageNum++;
 				if (imageNum == 3) {

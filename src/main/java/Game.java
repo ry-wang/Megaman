@@ -1,3 +1,5 @@
+package main.java;
+
 import java.applet.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -94,7 +96,7 @@ public class Game extends Applet implements Runnable {
 		healthPackBox = new Rectangle(healthBoost.getX(), healthBoost.getY(), 22, 15);
 
 		try {
-			Background = ImageIO.read((this.getClass().getResource("/images/background.png")));
+			Background = ImageIO.read((this.getClass().getResource("/main/resources/images/background.png")));
 		}
 		catch (IOException e) {
 			System.out.println("Error loading Background");
@@ -421,21 +423,21 @@ public class Game extends Applet implements Runnable {
 			healthBoost.paintPack(g);
 		}
 
-		for (int i = 0; i < platformArray.length; i++) {
-			if (platformArray[i] != null) {
-				platformArray[i].paintPlatforms(g);
+		for (Platforms i: platformArray) {
+			if (i != null) {
+				i.paintPlatforms(g);
 			}
 		}
 
-		for (int i = 0; i < turretArray.length; i++) {
-			if (turretArray[i] != null) {
-				turretArray[i].paintTurrets(g);
+		for (Turret i: turretArray) {
+			if (i != null) {
+				i.paintTurrets(g);
 			}
 		}
 
-		for (int i = 0; i < enemyArray.length; i++) {
-			if (enemyArray[i] != null) {
-				enemyArray[i].paintEnemy(g);
+		for (Enemy i: enemyArray) {
+			if (i != null) {
+				i.paintEnemy(g);
 			}
 		}
 
@@ -534,7 +536,7 @@ public class Game extends Applet implements Runnable {
 						playerShotArrayBox[i] = null;
 
 						if (enemyArray[k].getTimesHit() == 4) {
-							points = points + 100;
+							points += 100;
 							enemyArray[k].setImageNum(1);
 							enemyArray[k].setDestroyed(true);
 							enemyHitBox[k] = null;

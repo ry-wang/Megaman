@@ -1,3 +1,5 @@
+package main.java;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
@@ -35,7 +37,7 @@ import javax.swing.DefaultComboBoxModel;
 public class Scores extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/scoresAudio.wav"));
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/scoresAudio.wav"));
 	private JComboBox cbxSortType = new JComboBox();
 	private JComboBox cbxSearchType = new JComboBox();
 
@@ -242,7 +244,7 @@ public class Scores extends JFrame implements ActionListener {
 		entryNum = 0;
 		scoreTable = new String[entryNum][5];
 		try {
-			FileReader inputFile = new FileReader("scores.txt");
+			FileReader inputFile = new FileReader(this.getClass().getClassLoader().getResource("scores.txt").getFile());
 			BufferedReader bufferReader = new BufferedReader(inputFile);
 
 			while ((inputText = bufferReader.readLine()) != null) {

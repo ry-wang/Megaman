@@ -1,3 +1,5 @@
+package main.java;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
@@ -22,7 +24,7 @@ import javax.swing.JButton;
 
 public class LoseScreen extends JFrame implements ActionListener {
 
-	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/loseScreenAudio.wav"));
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/loseScreenAudio.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

@@ -1,5 +1,8 @@
+package main.java;
+
 import java.awt.Color;
 import java.awt.Graphics;
+import java.lang.*;
 
 /**
  * @ Description: TurretShot class, used for creating the turret shots
@@ -9,7 +12,7 @@ import java.awt.Graphics;
  */
 
 
-public class TurretShot extends Object{
+public class TurretShot extends Object {
 
 	private int radius;
 	private String direction;

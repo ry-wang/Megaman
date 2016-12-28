@@ -1,19 +1,18 @@
+package main.java;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.EventQueue;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
 import javax.swing.JLabel;
-import java.awt.Font;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
@@ -27,13 +26,11 @@ import javax.swing.JButton;
 
 public class CompleteScreen extends JFrame implements ActionListener {
 
-	private JPanel contentPane;
 	private int time;
 	private int points;
 	private int healthLost;
 	private int score;
-	private int exit;
-	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/completeScreenMusic.wav"));
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/completeScreenMusic.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -49,6 +46,8 @@ public class CompleteScreen extends JFrame implements ActionListener {
 	}
 
 	public CompleteScreen() {
+		JPanel contentPane;
+
 		setBackground(Color.BLACK);
 		setTitle("Game Complete!");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,22 +155,23 @@ public class CompleteScreen extends JFrame implements ActionListener {
 			Control.menuFrame.setVisible(true);
 		}
 		if (evt.getActionCommand(). equals ("Exit")) {
-			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
+			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 			if (exit == 0) {
 				System.exit(0);
 			}
 		}
 	}
 
-	public void appendToText() {
+	private void appendToText() {
 		BufferedWriter bw = null;
 		try{
-			bw = new BufferedWriter(new FileWriter("scores.txt", true));
+			bw = new BufferedWriter(new FileWriter("src/main/resources/scores.txt", true));
 			bw.write(Menu.name + "\t" + points + "\t" + healthLost + "\t" + time + "\t" + score);
 			bw.newLine();
 			bw.flush();
 		}
-		catch(IOException e){
+		catch(IOException e) {
+			System.out.println("Error writing to text file");
 		}
 		finally{
 			if(bw != null){
@@ -179,6 +179,7 @@ public class CompleteScreen extends JFrame implements ActionListener {
 					bw.close();
 				}
 				catch(IOException e2) {
+					System.out.println("Error closing bufferwriter.");
 				}
 			}
 		}

@@ -1,3 +1,5 @@
+package main.java;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -22,10 +24,7 @@ import javax.swing.SwingConstants;
 
 public class Instructions extends JFrame implements ActionListener {
 
-	private JPanel contentPane;
-	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/instructionsAudio.wav"));
-
-    private final Font instructionsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/instructionsAudio.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -41,6 +40,9 @@ public class Instructions extends JFrame implements ActionListener {
 	}
 
 	public Instructions() {
+		JPanel contentPane;
+        final Font instructionsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
+
 		setTitle("Instructions");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 50, 600, 620);

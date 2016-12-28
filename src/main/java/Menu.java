@@ -1,3 +1,5 @@
+package main.java;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
@@ -24,7 +26,7 @@ import java.awt.event.ActionListener;
 public class Menu extends JFrame implements ActionListener {
 
 	static String name;
-    private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/menuAudio.wav"));
+    private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/menuAudio.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -53,7 +55,7 @@ public class Menu extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 
 		JLabel lblTitle = new JLabel("");
-		lblTitle.setIcon(new ImageIcon(Menu.class.getResource("/menuImages/menu (Custom).png")));
+		lblTitle.setIcon(new ImageIcon(Menu.class.getResource("/main/resources/menuImages/menu (Custom).png")));
 		lblTitle.setBounds(28, 13, 516, 227);
 		contentPane.add(lblTitle);
 

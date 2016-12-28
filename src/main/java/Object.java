@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * @ Description: Object class, base class for game objects
  * @ Author: Ryan Wang

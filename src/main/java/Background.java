@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * @ Description: background class, creates all the background walls
  * @ Author: Ryan Wang

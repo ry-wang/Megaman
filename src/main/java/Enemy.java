@@ -1,3 +1,5 @@
+package main.java;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
@@ -186,7 +188,7 @@ public class Enemy extends Object {
 			//Draws each image for moving right
 			if (motion.equalsIgnoreCase("Walk Right")) {
 				try {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/E" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/E" + imageNum + ".png"))), x, y, null);
 					//Delays the animation slightly so it looks more real
 					if (delayAnimation == delayGoal) {
 						delayAnimation = 0;
@@ -207,7 +209,7 @@ public class Enemy extends Object {
 			//Same code as above, only image is different because enemy is moving left
 			else {
 				try {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/EL" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/EL" + imageNum + ".png"))), x, y, null);
 					if (delayAnimation == delayGoal) {
 						delayAnimation = 0;
 						imageNum++;
@@ -230,7 +232,7 @@ public class Enemy extends Object {
 			//Loops through the explosion animation
 			if (deathAnimationComplete == false) {
 				try {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/EN" + imageNum + ".png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/EN" + imageNum + ".png"))), x, y, null);
 					imageNum++;
 					if (imageNum == 11) {
 						deathAnimationComplete = true;
