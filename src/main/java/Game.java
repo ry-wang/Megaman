@@ -4,6 +4,8 @@ import java.applet.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.imageio.ImageIO;
 
 /**
@@ -20,6 +22,8 @@ public class Game extends Applet implements Runnable {
 	private Player megaMan;
 	private Rectangle playerBox;
 	private Rectangle playerCollisionBox;
+
+	static final Map maxPlayerImageNum = new HashMap();
 
 	static int points = 0;
 	private int timer = 0;
@@ -64,6 +68,8 @@ public class Game extends Applet implements Runnable {
 
 	public void init()  {
 		this.resize(1000, 500);
+
+		initPlayerImageMap();
 
 		turretArray = new Turret[2];
 		turretShotArray = new TurretShot[12];
@@ -443,6 +449,7 @@ public class Game extends Applet implements Runnable {
 
 		playerCollisionBox.setBounds(megaMan.getX(), megaMan.getY() + 34, 30, 2);
 		megaMan.paintPlayer(g);
+		megaMan.updateImageNum((int) maxPlayerImageNum.get(megaMan.getState()));
 
 		if (megaMan.getState().equalsIgnoreCase("Still")) {
 			playerBox.setBounds(megaMan.getX(), megaMan.getY(), 30, 34);
@@ -819,6 +826,14 @@ public class Game extends Applet implements Runnable {
 				megaMan.setState("Jump Move");
 			}
 		}
+	}
+
+	private void initPlayerImageMap() {
+		maxPlayerImageNum.put("Still", 4);
+		maxPlayerImageNum.put("Run", 12);
+		maxPlayerImageNum.put("Jump", 9);
+		maxPlayerImageNum.put("Jump Move", 9);
+		maxPlayerImageNum.put("Shoot", 3);
 	}
 
 }

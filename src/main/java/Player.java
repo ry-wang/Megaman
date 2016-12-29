@@ -15,8 +15,8 @@ import javax.imageio.ImageIO;
 
 public class Player extends Object {
 
-	private int xSpeed = 8;
-	private int ySpeed = 20;
+	private final int xSpeed = 8;
+	private final int ySpeed = 20;
 	private int bulletCount = 5;
 	private int imageNum = 1;
 	private int health = 100;
@@ -132,93 +132,40 @@ public class Player extends Object {
 		y += ySpeed;
 	}
 
+	protected void updateImageNum(int max) {
+		imageNum++;
+		if (imageNum == max) {
+			imageNum = 1;
+
+			if (characterState.equalsIgnoreCase("Jump")  || characterState.equalsIgnoreCase("Jump Move")) {
+				setJumping(false);
+			}
+
+			if (characterState.equalsIgnoreCase("Jump") || characterState.equalsIgnoreCase("Shoot")) {
+				setState("Still");
+			}
+			else if (characterState.equalsIgnoreCase("Jump Move")) {
+				setState("Run");
+			}
+		}
+	}
+
 	protected void paintPlayer (Graphics g)  {
-		if (characterState.equalsIgnoreCase("Still")) {
-			try {
-				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/S" + imageNum + ".png"))), x, y, null);
-				} else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LS" + imageNum + ".png"))), x, y, null);
-				}
-				imageNum++;
-				if (imageNum == 4) {
-					imageNum = 1;
-				}
-			}
-			catch (IOException e) {
-				System.out.println("Error loading image");
-			}
-		}
-		if (characterState.equalsIgnoreCase("Run")) {
-			try {
-				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/R" + imageNum + ".png"))), x, y, null);
-				} else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LR" + imageNum + ".png"))), x, y, null);
-				}
-				imageNum++;
-				if (imageNum == 12) {
-					imageNum = 1;
-				}
-			}
-			catch (IOException e) {
-				System.out.println("Error loading image");
-			}
-		}
-		if (characterState.equalsIgnoreCase("Jump")) {
-			try {
-				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/J" + imageNum + ".png"))), x, y, null);
-				}
-				else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LJ" + imageNum + ".png"))), x, y, null);
-				}
-				imageNum++;
-				if (imageNum == 9) {
-					imageNum = 1;
-					isJumping = false;
-					characterState = "Still";
-				}
-			}
-			catch (IOException e) {
-				System.out.println("Error loading image");
-			}
-		}
-		if (characterState.equalsIgnoreCase("Jump Move")) {
-			try {
-				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/J" + imageNum + ".png"))), x, y, null);
-				}
-				else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LJ" + imageNum + ".png"))), x, y, null);
-				}
-				imageNum++;
-				if (imageNum == 9) {
-					imageNum = 1;
-					isJumping = false;
-					characterState = "Run";
-				}
-			}
-			catch (IOException e) {
-				System.out.println("Error loading image");
-			}
+		String state = characterState.substring(0, 1);
+		String direction = "";
+		if (characterDirection.equalsIgnoreCase("Left")) {
+			direction = "L";
 		}
 		if (characterState.equalsIgnoreCase("Shoot")) {
-			try {
-				if (characterDirection.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/SH" + imageNum + ".png"))), x, y, null);
-				} else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LSH" + imageNum + ".png"))), x, y, null);
-				}
-				imageNum++;
-				if (imageNum == 3) {
-					imageNum = 1;
-					characterState = "Still";
-				}
-			}
-			catch (IOException e) {
-				System.out.println("Error loading image");
-			}
+			state = "SH";
+		}
+		String imagePath = "/main/resources/images/" + direction + state + imageNum + ".png";
+
+		try {
+			g.drawImage(ImageIO.read(this.getClass().getResource(imagePath)), x, y, null);
+		}
+		catch (IOException e) {
+			System.out.println("Error loading image");
 		}
 	}
 	
