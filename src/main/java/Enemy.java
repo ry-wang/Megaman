@@ -119,8 +119,8 @@ public class Enemy extends Object {
 		return timesHit;
 	}
 	
-	protected void resetImageNum() {
-		imageNum = 1;
+	protected void setImageNum(int input) {
+		imageNum = input;
 	}
 
 	protected void setDestroyed() {
@@ -133,6 +133,10 @@ public class Enemy extends Object {
 
 	protected void setState(String input) {
 		motion = input;
+	}
+
+	protected boolean getDeathAnimationState() {
+		return deathAnimationComplete;
 	}
 
 	protected void moveEnemy() {

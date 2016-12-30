@@ -545,7 +545,7 @@ public class Game extends Applet implements Runnable {
 
 						if (enemyArray[k].getTimesHit() == 4) {
 							points += 100;
-							enemyArray[k].resetImageNum();
+							enemyArray[k].setImageNum(1);
 							enemyArray[k].setDestroyed();
 							enemyHitBox[k] = null;
 							if (enemyArray[k].getImageNum() == 11) {
