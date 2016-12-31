@@ -29,7 +29,7 @@ public class HealthPack extends Object {
 		}
 	}
 
-	public void paintPack(Graphics g) {
+	protected void paintPack(Graphics g) {
 		try {
 			g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/healthBoost.png"))), x, y, null);
 		}
