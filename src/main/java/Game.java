@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
  * September 2016
  */
 
+
 public class Game extends Applet implements Runnable {
 
 	static Thread th;
