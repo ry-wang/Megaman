@@ -34,7 +34,7 @@ public class HealthPack extends Object {
 			g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/healthBoost.png"))), x, y, null);
 		}
 		catch (IOException e) {
-			System.out.println("error");
+			System.out.println("Error painting Healthpack");
 		}
 	}
 

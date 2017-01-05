@@ -17,7 +17,6 @@ import javax.imageio.ImageIO;
 public class Platforms extends Object {
 
 	private int width;
-	private int height = 14;
 
 	Platforms (int x, int y, int w) {
 		super(x, y);
@@ -29,26 +28,24 @@ public class Platforms extends Object {
 	}
 
 	protected int getHeight() {
+		final int height = 14;
 		return height;
 	}
 
 	protected void paintPlatforms(Graphics g) {
 		try {
-			if (width == 100) {
-				g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/platform1.png"))), getX(), getY(), null);
+			String imagePath = "/main/resources/images/platform";
+			switch (width) {
+				case 100: imagePath += "1.png"; break;
+				case 150: imagePath += "2.png"; break;
+				case 175: imagePath += "3.png"; break;
+				case 200: imagePath += "4.png"; break;
+				default: break;
 			}
-			else if (width == 150) {
-				g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/platform2.png"))), getX(), getY(), null);
-			}
-			else if (width == 175) {
-				g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/platform3.png"))), getX(), getY(), null);
-			}
-			else if (width == 200) {
-				g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/platform4.png"))), getX(), getY(), null);
-			}
+			g.drawImage(ImageIO.read((this.getClass().getResource(imagePath))), getX(), getY(), null);
 		}
 		catch (IOException e) {
-			System.out.println("error");
+			System.out.println("Error drawing platform");
 		}
 	}
 }

@@ -24,7 +24,7 @@ public class Game extends Applet implements Runnable {
 	private Rectangle playerBox;
 	private Rectangle playerCollisionBox;
 
-	static final Map maxPlayerImageNum = new HashMap();
+	private final Map maxPlayerImageNum = new HashMap();
 
 	static int points = 0;
 	private int timer = 0;
@@ -38,7 +38,7 @@ public class Game extends Applet implements Runnable {
 	private int turretShotNum = 0;
 	private int turret1ShotTimer = 0;
 	private int turret2ShotTimer = 0;
-	private int turretShotRadius = 10;
+	private final int turretShotRadius = 10;
 
 	private Shot playerShotArray[];
 	private Rectangle playerShotArrayBox[];
@@ -221,14 +221,14 @@ public class Game extends Applet implements Runnable {
 			}
 
 			//Player with platform collision testing
-			for (int i = 0; i < platformBoxes.length; i++) {
-				if (platformBoxes[i] != null) {
+			for (Rectangle i: platformBoxes) {
+				if (i != null) {
 					//If playerBox intersects any wall, sets the y value of player so that it's on top of platform
-					if (playerBox.intersects(platformBoxes[i])) {
+					if (playerBox.intersects(i)) {
 						megaMan.setOnGround(true);
 						intersecting = true;
 						if ((megaMan.isDown()) ||(!megaMan.isDown())) {
-							megaMan.setY(platformBoxes[i].y - 48);
+							megaMan.setY(i.y - 48);
 						}
 					}
 				}
@@ -280,9 +280,9 @@ public class Game extends Applet implements Runnable {
 			}
 
 			enemyMovement();
-			shotMoveCollisionTest();
-			onGroundCollisionTest();
-			verticalWallCollisionTest();
+			shotMoveCollisionCheck();
+			onGroundCollisionCheck();
+			verticalWallCollisionCheck();
 
 			//Increase of timer value
 			timer++;
@@ -504,7 +504,13 @@ public class Game extends Applet implements Runnable {
 		}
 	}
 
-	private void shotMoveCollisionTest() {
+	private void shotCollisionUpdate(int i) {
+		megaMan.setBulletCount(megaMan.getBulletCount() + 1);
+		playerShotArray[i] = null;
+		playerShotArrayBox[i] = null;
+	}
+
+	private void shotMoveCollisionCheck() {
 
 		for (int i = 0; i < playerShotArray.length; i++) {
 			if (playerShotArray[i] != null) {
@@ -512,15 +518,11 @@ public class Game extends Applet implements Runnable {
 
 				if (playerShotArray[i].getDirection().equalsIgnoreCase("Right")) {
 					if (playerShotArray[i].getX() > (this.getWidth() - 10)) {
-						megaMan.setBulletCount(megaMan.getBulletCount() + 1);
-						playerShotArray[i] = null;
-						playerShotArrayBox[i] = null;
+						shotCollisionUpdate(i);
 					}
 				} else {
 					if (playerShotArray[i].getX() < 0) {
-						megaMan.setBulletCount(megaMan.getBulletCount() + 1);
-						playerShotArray[i] = null;
-						playerShotArrayBox[i] = null;
+						shotCollisionUpdate(i);
 					}
 				}
 			}
@@ -529,9 +531,7 @@ public class Game extends Applet implements Runnable {
 			for (int k = 0; k < walls.length; k++) {
 				if (playerShotArray[i] != null) {
 					if (playerShotArrayBox[i].intersects(wallBoxes[k])) {
-						megaMan.setBulletCount(megaMan.getBulletCount() + 1);
-						playerShotArray[i] = null;
-						playerShotArrayBox[i] = null;
+						shotCollisionUpdate(i);
 					}
 				}
 			}
@@ -540,9 +540,7 @@ public class Game extends Applet implements Runnable {
 			for (int k = 0; k < enemyArray.length; k++) {
 				if ((playerShotArray[i] != null) && (enemyArray[k] != null) && (enemyHitBox[k] != null))  {
 					if (playerShotArrayBox[i].intersects(enemyHitBox[k])) {
-						megaMan.setBulletCount(megaMan.getBulletCount() + 1);
-						playerShotArray[i] = null;
-						playerShotArrayBox[i] = null;
+						shotCollisionUpdate(i);
 
 						if (enemyArray[k].getTimesHit() == 4) {
 							points += 100;
@@ -563,16 +561,14 @@ public class Game extends Applet implements Runnable {
 			for (int k = 0; k < platformArray.length; k++) {
 				if ((playerShotArray[i] != null) && (platformBoxes[k] != null)) {
 					if (playerShotArrayBox[i].intersects(platformBoxes[k])) {
-						megaMan.setBulletCount(megaMan.getBulletCount() + 1);
-						playerShotArray[i] = null;
-						playerShotArrayBox[i] = null;
+						shotCollisionUpdate(i);
 					}
 				}
 			}
 		}
 	}
 
-	private void onGroundCollisionTest() {
+	private void onGroundCollisionCheck() {
 		for (int i = 0; i < walls.length; i++) {
 			if (playerCollisionBox.intersects(wallBoxes[i])) {
 				if (!megaMan.onGround()) {
@@ -600,7 +596,7 @@ public class Game extends Applet implements Runnable {
 		}
 	}
 
-	private void verticalWallCollisionTest() {
+	private void verticalWallCollisionCheck() {
 		for (int i = 0; i < walls.length; i++) {
 			if (walls[i].getOrientation().equalsIgnoreCase("Vertical")) {
 				if ((megaMan.getDirection().equalsIgnoreCase("Right")) && (megaMan.getState().equalsIgnoreCase("Run"))) {
