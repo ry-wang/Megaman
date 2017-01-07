@@ -34,14 +34,12 @@ public class Game extends Applet implements Runnable {
 
 	private Turret turretArray[];
 	private TurretShot turretShotArray[];
-	private Rectangle turretShotArrayBox[];
 	private int turretShotNum = 0;
 	private int turret1ShotTimer = 0;
 	private int turret2ShotTimer = 0;
 	private final int turretShotRadius = 10;
 
 	private Shot playerShotArray[];
-	private Rectangle playerShotArrayBox[];
 
 	private Platforms platformArray[];
 	private Rectangle platformBoxes[];
@@ -59,7 +57,6 @@ public class Game extends Applet implements Runnable {
 	private int playerShotRadius = 10;
 
 	private HealthPack healthBoost;
-	private Rectangle healthPackBox;
 
 	private BufferedImage Background;
 
@@ -74,7 +71,6 @@ public class Game extends Applet implements Runnable {
 
 		turretArray = new Turret[2];
 		turretShotArray = new TurretShot[12];
-		turretShotArrayBox = new Rectangle[12];
 		generateTurrets();
 
 		walls = new Background[32];
@@ -82,7 +78,6 @@ public class Game extends Applet implements Runnable {
 		createWalls();
 
 		playerShotArray = new Shot[5];
-		playerShotArrayBox = new Rectangle[5];
 
 		platformArray = new Platforms[5];
 		platformBoxes = new Rectangle[5];
@@ -100,7 +95,7 @@ public class Game extends Applet implements Runnable {
 		playerCollisionBox = new Rectangle(45, 329);
 
 		healthBoost = new HealthPack(level);
-		healthPackBox = new Rectangle(healthBoost.getX(), healthBoost.getY(), 22, 15);
+		//healthPackBox = new Rectangle(healthBoost.getX(), healthBoost.getY(), 22, 15);
 
 		try {
 			Background = ImageIO.read((this.getClass().getResource("/main/resources/images/background.png")));
@@ -189,17 +184,15 @@ public class Game extends Applet implements Runnable {
 					turret1ShotTimer = 0;
 					if (turretArray[0] != null) {
 						if (turretShotArray[turretShotNum] == null) {
-							//Shots have different properties based on which level player is on
-							if (level == 1) {
-								turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Left");
+							String direction;
+							if (level == 1 || level == 2) {
+								direction = "Left";
 							}
-							else if (level == 2) {
-								turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Left");
+							else {
+								direction = "Right";
 							}
-							else if (level == 3) {
-								turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, "Right");
-							}
-							turretShotArrayBox[turretShotNum] = new Rectangle(turretShotArray[turretShotNum].getX(), turretShotArray[turretShotNum].getY(), turretShotRadius, turretShotRadius);
+							turretShotArray[turretShotNum] = new TurretShot(turretArray[0].getX(), turretArray[0].getY() + 5, turretShotRadius, direction);
+							//turretShotArrayBox[turretShotNum] = new Rectangle(turretShotArray[turretShotNum].getX(), turretShotArray[turretShotNum].getY(), turretShotRadius, turretShotRadius);
 							turretShotNum++;
 						}
 					}
@@ -211,7 +204,7 @@ public class Game extends Applet implements Runnable {
 					if (turretArray[1] != null) {
 						if (turretShotArray[turretShotNum] == null) {
 							turretShotArray[turretShotNum] = new TurretShot(turretArray[1].getX() + 15, turretArray[1].getY() - 2, turretShotRadius, "Up");
-							turretShotArrayBox[turretShotNum] = new Rectangle(turretShotArray[turretShotNum].getX(), turretShotArray[turretShotNum].getY(), turretShotRadius, turretShotRadius);
+							//turretShotArrayBox[turretShotNum] = new Rectangle(turretShotArray[turretShotNum].getX(), turretShotArray[turretShotNum].getY(), turretShotRadius, turretShotRadius);
 							turretShotNum++;
 						}
 					}
@@ -239,43 +232,39 @@ public class Game extends Applet implements Runnable {
 				if (turretShotArray[i] != null) {
 					turretShotArray[i].moveShot();
 
-					if (turretShotArrayBox[i].intersects(playerBox)) {
+					if (turretShotArray[i].getShotBox().intersects(playerBox)) {
 						megaMan.setHealth(megaMan.getHealth() - 5);
-						turretShotArray[i] = null;
-						turretShotArrayBox[i] = null;
+						destroyTurretShot(i);
 					}
 					else {
 						if (turretShotArray[i].getDirection().equalsIgnoreCase("Left")) {
 							if (turretShotArray[i].getX() < 5) {
-								turretShotArray[i] = null;
-								turretShotArrayBox[i] = null;
+								destroyTurretShot(i);
 							}
 						}
 						else if (turretShotArray[i].getDirection().equalsIgnoreCase("Right")) {
 							if (turretShotArray[i].getX() > 985) {
-								turretShotArray[i] = null;
-								turretShotArrayBox[i] = null;
+								destroyTurretShot(i);
 							}
 						}
 						else {
 							if (turretShotArray[i].getY() < 20) {
-								turretShotArray[i] = null;
-								turretShotArrayBox[i] = null;
+								destroyTurretShot(i);
 							}
 						}
 					}
 				}
 			}
 
-			if ((healthPackBox != null) && (healthBoost != null)) {
-				if (playerBox.intersects(healthPackBox)) {
+			if (healthBoost != null) {
+				if (playerBox.intersects(healthBoost.getHealthPackBox())) {
 					if ((megaMan.getHealth() + 10) <= 100) {
 						megaMan.setHealth(megaMan.getHealth() + 15);
 					} else {
 						megaMan.setHealth(100);
 					}
 					healthBoost = null;
-					healthPackBox = null;
+					//healthPackBox = null;
 				}
 			}
 
@@ -283,15 +272,7 @@ public class Game extends Applet implements Runnable {
 			shotMoveCollisionCheck();
 			onGroundCollisionCheck();
 			verticalWallCollisionCheck();
-
-			//Increase of timer value
-			timer++;
-			//If timer == 20, that means 1 second has passed since refresh rate is 50ms
-			if (timer == 20) {
-				//Increases real time value and resets timer value
-				time++;
-				timer = 0;
-			}
+			updateGameTime();
 
 			if (level == 1) {
 				if ((megaMan.getX() >= 960) && (megaMan.getY() < 200)) {
@@ -355,10 +336,8 @@ public class Game extends Applet implements Runnable {
 
 				if (megaMan.getDirection().equalsIgnoreCase("Right")) {
 					playerShotArray[playerShotNum] = new Shot(megaMan.getX() + 30, megaMan.getY() + 15, playerShotRadius, megaMan.getDirection());
-					playerShotArrayBox[playerShotNum] = new Rectangle(megaMan.getX() + 30, megaMan.getY() + 15, playerShotRadius, playerShotRadius);
 				} else {
 					playerShotArray[playerShotNum] = new Shot(megaMan.getX(), megaMan.getY() + 15, playerShotRadius, megaMan.getDirection());
-					playerShotArrayBox[playerShotNum] = new Rectangle(megaMan.getX(), megaMan.getY() + 15, playerShotRadius, playerShotRadius);
 				}
 
 				playerShotNum++;
@@ -420,14 +399,14 @@ public class Game extends Applet implements Runnable {
 		g.setColor(Color.green);
 		g.fillRect(250, 440, (megaMan.getHealth() * 5), 10);
 
-		for (int i = 0; i < turretShotArray.length; i++) {
-			if (turretShotArray[i] != null) {
-				turretShotArrayBox[i].setBounds(turretShotArray[i].getX(), turretShotArray[i].getY(), 3, 3);
-				turretShotArray[i].paintShot(g);
-			}
-		}
-		if ((healthBoost != null) && (healthPackBox != null)) {
+		if (healthBoost != null) {
 			healthBoost.paintPack(g);
+		}
+
+		for (TurretShot i: turretShotArray) {
+			if (i != null) {
+				i.paintShot(g);
+			}
 		}
 
 		for (Platforms i: platformArray) {
@@ -463,12 +442,12 @@ public class Game extends Applet implements Runnable {
 			playerBox.setBounds(megaMan.getX(), megaMan.getY(), 30, 45);
 		}
 
-		for (int i = 0; i < playerShotArray.length; i++) {
-			if (playerShotArray[i] != null) {
-				playerShotArray[i].paintShot(g);
-				playerShotArrayBox[i].setBounds(playerShotArray[i].getX(), playerShotArray[i].getY(), playerShotRadius, playerShotRadius);
+		for (Shot i: playerShotArray) {
+			if (i != null) {
+				i.paintShot(g);
 			}
 		}
+
 	}
 
 	private void enemyMovement() {
@@ -490,7 +469,6 @@ public class Game extends Applet implements Runnable {
 							}
 						}
 					}
-
 					else if (!(enemyHitBox[i].intersects(enemyWallCollisionBox[k]))) {
 						if (enemyArray[i].getIntersectsWall()) {
 							enemyArray[i].setIntersectsWall(false);
@@ -504,10 +482,22 @@ public class Game extends Applet implements Runnable {
 		}
 	}
 
+	private void destroyTurretShot(int i) {
+		turretShotArray[i] = null;
+	}
+
 	private void shotCollisionUpdate(int i) {
 		megaMan.setBulletCount(megaMan.getBulletCount() + 1);
 		playerShotArray[i] = null;
-		playerShotArrayBox[i] = null;
+	}
+
+	private void updateGameTime() {
+		timer++;
+		//If timer == 20, that means 1 second has passed since refresh rate is 50ms
+		if (timer == 20) {
+			time++;
+			timer = 0;
+		}
 	}
 
 	private void shotMoveCollisionCheck() {
@@ -530,7 +520,7 @@ public class Game extends Applet implements Runnable {
 			//Shot and Wall Collision
 			for (int k = 0; k < walls.length; k++) {
 				if (playerShotArray[i] != null) {
-					if (playerShotArrayBox[i].intersects(wallBoxes[k])) {
+					if (playerShotArray[i].getShotBox().intersects(wallBoxes[k])) {
 						shotCollisionUpdate(i);
 					}
 				}
@@ -539,7 +529,7 @@ public class Game extends Applet implements Runnable {
 			//Shot and enemy collision
 			for (int k = 0; k < enemyArray.length; k++) {
 				if ((playerShotArray[i] != null) && (enemyArray[k] != null) && (enemyHitBox[k] != null))  {
-					if (playerShotArrayBox[i].intersects(enemyHitBox[k])) {
+					if (playerShotArray[i].getShotBox().intersects(enemyHitBox[k])) {
 						shotCollisionUpdate(i);
 
 						if (enemyArray[k].getTimesHit() == 4) {
@@ -560,7 +550,7 @@ public class Game extends Applet implements Runnable {
 			//Shot and Platform Collision
 			for (int k = 0; k < platformArray.length; k++) {
 				if ((playerShotArray[i] != null) && (platformBoxes[k] != null)) {
-					if (playerShotArrayBox[i].intersects(platformBoxes[k])) {
+					if (playerShotArray[i].getShotBox().intersects(platformBoxes[k])) {
 						shotCollisionUpdate(i);
 					}
 				}
@@ -764,7 +754,6 @@ public class Game extends Applet implements Runnable {
 		for (int i = 0; i < turretShotArray.length; i++) {
 			if (turretShotArray[i] != null) {
 				turretShotArray[i] = null;
-				turretShotArrayBox[i] = null;
 			}
 		}
 
@@ -772,12 +761,11 @@ public class Game extends Applet implements Runnable {
 			megaMan.setBulletCount(5);
 			if (playerShotArray[i] != null) {
 				playerShotArray[i] = null;
-				playerShotArrayBox[i] = null;
 			}
 		}
 
 		healthBoost = new HealthPack(level);
-		healthPackBox = new Rectangle(healthBoost.getX(), healthBoost.getY(), 22, 15);
+		//healthPackBox = new Rectangle(healthBoost.getX(), healthBoost.getY(), 22, 15);
 
 		generatePlatforms();
 		generateTurrets();

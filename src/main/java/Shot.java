@@ -1,7 +1,8 @@
 package main.java;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import org.w3c.dom.css.Rect;
+
+import java.awt.*;
 import java.lang.*;
 
 /**
@@ -15,11 +16,13 @@ public class Shot extends Object {
 
 	private int radius;
 	private String direction;
+	private Rectangle shotBox;
 
 	Shot(int x, int y, int r, String directionInput) {
 		super(x, y);
 		radius = r;
 		direction = directionInput;
+		shotBox = new Rectangle(x, y, radius, radius);
 	}
 
 	protected void moveShot() {
@@ -29,10 +32,15 @@ public class Shot extends Object {
 		} else {
 			x -= speed;
 		}
+		shotBox.setLocation(x, y);
 	}
 
 	protected String getDirection() {
 		return direction;
+	}
+
+	protected Rectangle getShotBox() {
+		return shotBox;
 	}
 
 	protected void paintShot (Graphics g)  {

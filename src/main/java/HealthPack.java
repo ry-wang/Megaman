@@ -1,6 +1,6 @@
 package main.java;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
  */
 
 public class HealthPack extends Object {
+
+	private Rectangle healthPackBox;
 
 	HealthPack(int level) {
 		super(0, 0);
@@ -27,6 +29,11 @@ public class HealthPack extends Object {
 			x = 20;
 			y = 162;
 		}
+		healthPackBox = new Rectangle(x, y, 22, 15);
+	}
+
+	protected Rectangle getHealthPackBox() {
+		return healthPackBox;
 	}
 
 	protected void paintPack(Graphics g) {
