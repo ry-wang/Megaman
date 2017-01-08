@@ -1,5 +1,7 @@
 package main.java;
 
+import java.awt.*;
+
 /**
  * @ Description: background class, creates all the background walls
  * @ Author: Ryan Wang
@@ -7,27 +9,17 @@ package main.java;
  * September 2016
  */
 
-public class Background extends Object {
+public class BackgroundWall extends Object {
 
-	private int width;
-	private int height;
 	private String orientation;
 	private String wallType;
+	private Rectangle wallBox;
 
-	Background(int x, int y, int w, int h, String orient, String type) {
+	BackgroundWall(int x, int y, int w, int h, String orient, String type) {
 		super(x, y);
-		width = w;
-		height = h;
 		orientation = orient;
 		wallType = type;
-	}
-
-	protected int getWidth() {
-		return width;
-	}
-
-	protected int getHeight() {
-		return height;
+		wallBox = new Rectangle(x, y, w, h);
 	}
 
 	protected String getOrientation() {
@@ -36,5 +28,9 @@ public class Background extends Object {
 
 	protected String getType() {
 		return wallType;
+	}
+
+	protected Rectangle getBox() {
+		return wallBox;
 	}
 }

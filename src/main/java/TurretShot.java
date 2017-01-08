@@ -40,7 +40,7 @@ public class TurretShot extends Object {
 		shotBox.setLocation(x, y);
 	}
 
-	protected Rectangle getShotBox() {
+	protected Rectangle getBox() {
 		return shotBox;
 	}
 

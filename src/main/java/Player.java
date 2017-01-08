@@ -1,6 +1,6 @@
 package main.java;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.io.IOException;
 import java.lang.*;
 import javax.imageio.ImageIO;
@@ -137,7 +137,7 @@ public class Player extends Object {
 		if (imageNum == max) {
 			imageNum = 1;
 
-			if (characterState.equalsIgnoreCase("Jump")  || characterState.equalsIgnoreCase("Jump Move")) {
+			if (characterState.equalsIgnoreCase("Jump") || characterState.equalsIgnoreCase("Jump Move")) {
 				setJumping(false);
 			}
 

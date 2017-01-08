@@ -165,7 +165,7 @@ public class CompleteScreen extends JFrame implements ActionListener {
 	private void appendToText() {
 		BufferedWriter bw = null;
 		try{
-			bw = new BufferedWriter(new FileWriter("src/main/resources/scores.txt", true));
+			bw = new BufferedWriter(new FileWriter("/src/main/resources/scores.txt", true));
 			bw.write(Menu.name + "\t" + points + "\t" + healthLost + "\t" + time + "\t" + score);
 			bw.newLine();
 			bw.flush();

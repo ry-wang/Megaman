@@ -32,7 +32,7 @@ public class HealthPack extends Object {
 		healthPackBox = new Rectangle(x, y, 22, 15);
 	}
 
-	protected Rectangle getHealthPackBox() {
+	protected Rectangle getBox() {
 		return healthPackBox;
 	}
 

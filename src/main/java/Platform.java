@@ -1,38 +1,35 @@
 package main.java;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.io.IOException;
 import java.lang.*;
 
 import javax.imageio.ImageIO;
 
 /**
- * @ Description: Platforms class, used for creating the platform objects in each level
+ * @ Description: Platform class, used for creating the platform objects in each level
  * @ Author: Ryan Wang
  * @ Version: v2.0
  * September 2016
  */
 
 
-public class Platforms extends Object {
+public class Platform extends Object {
 
 	private int width;
+	private Rectangle platformBox;
 
-	Platforms (int x, int y, int w) {
+	Platform(int x, int y, int w) {
 		super(x, y);
 		width = w;
+		platformBox = new Rectangle(x, y, width, 14);
 	}
 
-	protected int getWidth() {
-		return width;
+	protected Rectangle getPlatformBox() {
+		return platformBox;
 	}
 
-	protected int getHeight() {
-		final int height = 14;
-		return height;
-	}
-
-	protected void paintPlatforms(Graphics g) {
+	protected void paintPlatform(Graphics g) {
 		try {
 			String imagePath = "/main/resources/images/platform";
 			switch (width) {

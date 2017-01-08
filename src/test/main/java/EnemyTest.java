@@ -3,6 +3,9 @@ package main.java;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EnemyTest {
@@ -19,13 +22,13 @@ class EnemyTest {
         //Testing that x pos is greater than before
         if (testEnemy.getState().equalsIgnoreCase("Walk Right")) {
             int oldX = testEnemy.getX();
-            testEnemy.moveEnemy();
+            testEnemy.move();
             int newX = testEnemy.getX();
             assertTrue(newX > oldX, "New X (" + newX + ") should be greater than old X (" + oldX + ")");
         }
         else {
             int oldX = testEnemy.getX();
-            testEnemy.moveEnemy();
+            testEnemy.move();
             int newX = testEnemy.getX();
             assertTrue(newX < oldX, "New X (" + newX + ") should be less than old X (" + oldX + ")");
         }
@@ -40,7 +43,17 @@ class EnemyTest {
         testEnemy.setDestroyed();
         testEnemy.setImageNum(10);
         testEnemy.updateEnemyState();
-        assertTrue(testEnemy.getDeathAnimationState());
+        assertTrue(testEnemy.deathAnimationComplete());
+    }
+
+    @Test
+    void generateSpawnLocation() {
+        List<Integer> validYLocations = Arrays.asList(300, 334, 160);
+        assertTrue(validYLocations.contains(testEnemy.getY()));
+
+        testEnemy = new Enemy(2);
+        validYLocations = Arrays.asList(300, 334, 235);
+        assertTrue(validYLocations.contains(testEnemy.getY()));
     }
 
 }
