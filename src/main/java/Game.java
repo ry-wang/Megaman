@@ -296,7 +296,6 @@ public class Game extends Applet implements Runnable {
     }
 
     public boolean keyDown(Event e, int key)  {
-
         if(key == Event.LEFT) {
             megaMan.setDirection("Left");
             setMoveLogic();

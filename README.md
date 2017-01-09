@@ -1,6 +1,5 @@
 # Megaman
-Custom version of MegaMan X
-
+Custom version of MegaMan X.
 Written in Java using Swing library for the UI 
 and IntelliJ for development and testing.
 
@@ -22,5 +21,5 @@ Tests are written using JUnit 5.
 To run any specific file, open it and right-click on the tab, select `Run <className>`.
 
 ### Exporting
-To export the project as a .jar file, go to Build -> Build Artifacts -> Build
+To export the project as a .jar file, go to Build -> Build Artifacts -> Build.
 The jar file will be in `directory/out/artifacts/`.

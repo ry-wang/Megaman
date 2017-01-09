@@ -18,28 +18,33 @@ class EnemyTest {
     }
 
     @Test
-    void moveEnemy() {
+    void testMoveLeft() {
         //Testing that x pos is greater than before
-        if (testEnemy.getState().equalsIgnoreCase("Walk Right")) {
-            int oldX = testEnemy.getX();
-            testEnemy.move();
-            int newX = testEnemy.getX();
-            assertTrue(newX > oldX, "New X (" + newX + ") should be greater than old X (" + oldX + ")");
-        }
-        else {
-            int oldX = testEnemy.getX();
-            testEnemy.move();
-            int newX = testEnemy.getX();
-            assertTrue(newX < oldX, "New X (" + newX + ") should be less than old X (" + oldX + ")");
-        }
+        testEnemy.setState("Walk Right");
+        int oldX = testEnemy.getX();
+        testEnemy.move();
+        int newX = testEnemy.getX();
+        assertTrue(newX > oldX, "New X (" + newX + ") should be greater than old X (" + oldX + ")");
     }
 
     @Test
-    void updateEnemyState() {
+    void testMoveRight() {
+        testEnemy.setState("Walk Left");
+        int oldX = testEnemy.getX();
+        testEnemy.move();
+        int newX = testEnemy.getX();
+        assertTrue(newX < oldX, "New X (" + newX + ") should be less than old X (" + oldX + ")");
+    }
+
+    @Test
+    void testImageReset() {
         testEnemy.setImageNum(8);
         testEnemy.updateEnemyState();
         assertEquals(1, testEnemy.getImageNum());
+    }
 
+    @Test
+    void testEnemyDestroy() {
         testEnemy.setDestroyed();
         testEnemy.setImageNum(10);
         testEnemy.updateEnemyState();
@@ -47,12 +52,16 @@ class EnemyTest {
     }
 
     @Test
-    void generateSpawnLocation() {
+    void testSpawnLocation() {
         List<Integer> validYLocations = Arrays.asList(300, 334, 160);
         assertTrue(validYLocations.contains(testEnemy.getY()));
 
         testEnemy = new Enemy(2);
         validYLocations = Arrays.asList(300, 334, 235);
+        assertTrue(validYLocations.contains(testEnemy.getY()));
+
+        testEnemy = new Enemy(3);
+        validYLocations = Arrays.asList(300, 334, 160);
         assertTrue(validYLocations.contains(testEnemy.getY()));
     }
 
