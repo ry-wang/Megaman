@@ -3,18 +3,13 @@ package main.java;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 
 /**
  * @ Description: Credits class, displays the credits of the program
@@ -45,7 +40,7 @@ public class Credits extends JFrame implements ActionListener {
 		JPanel contentPane;
 
 		setTitle("Credits");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);

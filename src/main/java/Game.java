@@ -529,14 +529,14 @@ public class Game extends Applet implements Runnable {
     }
 
     private void onGroundCollisionCheck() {
-        for (int i = 0; i < backgroundWalls.length; i++) {
-            if (playerCollisionBox.intersects(backgroundWalls[i].getBox())) {
+        for (BackgroundWall wall: backgroundWalls) {
+            if (playerCollisionBox.intersects(wall.getBox())) {
                 if (!megaMan.onGround()) {
                     if (!megaMan.isJumping()) {
                         intersecting = true;
                         megaMan.setOnGround(true);
-                        if (backgroundWalls[i].getType().equalsIgnoreCase("Bottom")) {
-                            megaMan.setY(backgroundWalls[i].getY() - 34);
+                        if (wall.getType().equalsIgnoreCase("Bottom")) {
+                            megaMan.setY(wall.getY() - 34);
                             break;
                         }
                     }
@@ -557,24 +557,24 @@ public class Game extends Applet implements Runnable {
     }
 
     private void verticalWallCollisionCheck() {
-        for (int i = 0; i < backgroundWalls.length; i++) {
-            if (backgroundWalls[i].getOrientation().equalsIgnoreCase("Vertical")) {
+        for (BackgroundWall wall: backgroundWalls) {
+            if (wall.getOrientation().equalsIgnoreCase("Vertical")) {
                 if ((megaMan.getDirection().equalsIgnoreCase("Right")) && (megaMan.getState().equalsIgnoreCase("Run"))) {
                     if (!megaMan.isJumping()) {
-                        if (playerBox.intersects(backgroundWalls[i].getBox())) {
+                        if (playerBox.intersects(wall.getBox())) {
                             megaMan.setState("Still");
                             megaMan.setImageNum(1);
-                            megaMan.setX(backgroundWalls[i].getX() - 35);
+                            megaMan.setX(wall.getX() - 35);
                         }
                     }
                 }
                 else if ((megaMan.getDirection().equalsIgnoreCase("Left")) && (megaMan.getState().equalsIgnoreCase("Run"))) {
                     if (!megaMan.isJumping()) {
-                        if (playerBox.intersects(backgroundWalls[i].getBox())) {
+                        if (playerBox.intersects(wall.getBox())) {
                             megaMan.setState("Still");
                             megaMan.setImageNum(1);
-                            megaMan.setX(backgroundWalls[i].getX() + 12);
-                            megaMan.setY(backgroundWalls[i].getY() + 5);
+                            megaMan.setX(wall.getX() + 12);
+                            megaMan.setY(wall.getY() + 5);
                         }
                     }
                 }

@@ -3,14 +3,9 @@ package main.java;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Color;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -46,7 +41,7 @@ public class Menu extends JFrame implements ActionListener {
 		final JPanel contentPane;
 
 		setTitle("Megaman X");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);

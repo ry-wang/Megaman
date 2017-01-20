@@ -5,16 +5,11 @@ import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 
 /**
  * @ Description: CompleteScreen class, shows after user completes game
@@ -50,21 +45,13 @@ public class CompleteScreen extends JFrame implements ActionListener {
 
 		setBackground(Color.BLACK);
 		setTitle("Game Complete!");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		time = Game.time;
-		points = Game.points;
-		healthLost = (100 - Game.health);
-		score = points - healthLost - time;
-		if (score < 0) {
-			score = 0;
-		}
 
 		JLabel lblTitle = new JLabel("Game Complete");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -144,6 +131,7 @@ public class CompleteScreen extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 
+		calculateScores();
 		appendToText();
 	}
 
@@ -171,10 +159,11 @@ public class CompleteScreen extends JFrame implements ActionListener {
 			bw.flush();
 		}
 		catch(IOException e) {
+			e.printStackTrace();
 			System.out.println("Error writing to text file");
 		}
-		finally{
-			if(bw != null){
+		finally {
+			if (bw != null) {
 				try{
 					bw.close();
 				}
@@ -182,6 +171,16 @@ public class CompleteScreen extends JFrame implements ActionListener {
 					System.out.println("Error closing bufferwriter.");
 				}
 			}
+		}
+	}
+
+	private void calculateScores() {
+		time = Game.time;
+		points = Game.points;
+		healthLost = (100 - Game.health);
+		score = points - healthLost - time;
+		if (score < 0) {
+			score = 0;
 		}
 	}
 }
