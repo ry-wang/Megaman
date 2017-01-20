@@ -1,17 +1,12 @@
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+package main.java;
+
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.Color;
-import java.awt.EventQueue;
-import javax.swing.JLabel;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingConstants;
 
 /**
  * @ Description: Instructions class, displays the credits of the program
@@ -22,10 +17,7 @@ import javax.swing.SwingConstants;
 
 public class Instructions extends JFrame implements ActionListener {
 
-	private JPanel contentPane;
-	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/instructionsAudio.wav"));
-
-    private final Font instructionsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/instructionsAudio.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -41,8 +33,11 @@ public class Instructions extends JFrame implements ActionListener {
 	}
 
 	public Instructions() {
+		JPanel contentPane;
+        final Font instructionsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
+
 		setTitle("Instructions");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 50, 600, 620);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);

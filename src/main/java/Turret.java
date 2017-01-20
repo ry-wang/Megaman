@@ -1,5 +1,8 @@
+package main.java;
+
 import java.awt.Graphics;
 import java.io.IOException;
+import java.lang.*;
 
 import javax.imageio.ImageIO;
 
@@ -10,7 +13,7 @@ import javax.imageio.ImageIO;
  * September 2016
  */
 
-public class Turret extends Object{
+public class Turret extends Object {
 
 	private int type;
 	private String direction;
@@ -26,16 +29,16 @@ public class Turret extends Object{
 			//Paints different turrets based on direction and type
 			if (type == 1) {
 				if (direction.equalsIgnoreCase("Right")) {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/RTurret1.png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/RTurret1.png"))), x, y, null);
 				} else {
-					g.drawImage(ImageIO.read((this.getClass().getResource("/images/LTurret1.png"))), x, y, null);
+					g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/LTurret1.png"))), x, y, null);
 				}
 			} else {
-				g.drawImage(ImageIO.read((this.getClass().getResource("/images/turret2.png"))), x, y, null);
+				g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/turret2.png"))), x, y, null);
 			}
 		}
 		catch (IOException e) {
-			System.out.println("error");
+			System.out.println("Error drawing turret images.");
 		}
 	}
 }

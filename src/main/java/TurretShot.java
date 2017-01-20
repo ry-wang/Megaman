@@ -1,5 +1,9 @@
-import java.awt.Color;
-import java.awt.Graphics;
+package main.java;
+
+import org.w3c.dom.css.Rect;
+
+import java.awt.*;
+import java.lang.*;
 
 /**
  * @ Description: TurretShot class, used for creating the turret shots
@@ -9,15 +13,17 @@ import java.awt.Graphics;
  */
 
 
-public class TurretShot extends Object{
+public class TurretShot extends Object {
 
 	private int radius;
 	private String direction;
+	private Rectangle shotBox;
 
 	TurretShot (int x, int y, int r, String directionInput) {
 		super(x, y);
 		radius = r;
 		direction = directionInput;
+		shotBox = new Rectangle(x, y, radius, radius);
 	}
 
 	protected void moveShot() {
@@ -31,6 +37,11 @@ public class TurretShot extends Object{
 		else {
 			y -= speed;
 		}
+		shotBox.setLocation(x, y);
+	}
+
+	protected Rectangle getBox() {
+		return shotBox;
 	}
 
 

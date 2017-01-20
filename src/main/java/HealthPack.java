@@ -1,4 +1,6 @@
-import java.awt.Graphics;
+package main.java;
+
+import java.awt.*;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
@@ -10,6 +12,8 @@ import javax.imageio.ImageIO;
  */
 
 public class HealthPack extends Object {
+
+	private Rectangle healthPackBox;
 
 	HealthPack(int level) {
 		super(0, 0);
@@ -25,14 +29,19 @@ public class HealthPack extends Object {
 			x = 20;
 			y = 162;
 		}
+		healthPackBox = new Rectangle(x, y, 22, 15);
 	}
 
-	public void paintPack(Graphics g) {
+	protected Rectangle getBox() {
+		return healthPackBox;
+	}
+
+	protected void paintPack(Graphics g) {
 		try {
-			g.drawImage(ImageIO.read((this.getClass().getResource("/images/healthBoost.png"))), x, y, null);
+			g.drawImage(ImageIO.read((this.getClass().getResource("/main/resources/images/healthBoost.png"))), x, y, null);
 		}
 		catch (IOException e) {
-			System.out.println("error");
+			System.out.println("Error painting Healthpack");
 		}
 	}
 

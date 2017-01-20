@@ -1,23 +1,15 @@
+package main.java;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.SystemColor;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 
 /**
  * @ Description: Credits class, displays the credits of the program
@@ -28,11 +20,7 @@ import javax.swing.JButton;
 
 public class Credits extends JFrame implements ActionListener {
 
-	private JPanel contentPane;
-	private int exit;
-	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/creditsAudio.wav"));
-
-	private Font creditsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/creditsAudio.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -48,11 +36,14 @@ public class Credits extends JFrame implements ActionListener {
 	}
 
 	public Credits() {
+		Font creditsFont = new Font("SWTOR Trajan", Font.ITALIC, 18);
+		JPanel contentPane;
+
 		setTitle("Credits");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.desktop);
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -119,7 +110,7 @@ public class Credits extends JFrame implements ActionListener {
 			audioClip.loop();
 		}
 		catch (Exception e) {
-			System.out.println("Error loading music");
+			System.out.println("Error loading main.resources.music");
 		}
 	}
 
@@ -132,7 +123,7 @@ public class Credits extends JFrame implements ActionListener {
 			Control.menuFrame.setVisible(true);
 		}
 		if (evt.getActionCommand(). equals ("Exit")) {
-			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
+			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 			if (exit == 0) {
 				System.exit(0);
 			}

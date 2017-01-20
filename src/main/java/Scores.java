@@ -1,12 +1,10 @@
+package main.java;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -18,12 +16,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.*;
 import java.lang.Object;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 /**
  * @ Description: Score class, displays the scoreboard and also allows user to search and sort
@@ -35,7 +27,7 @@ import javax.swing.DefaultComboBoxModel;
 public class Scores extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/scoresAudio.wav"));
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/scoresAudio.wav"));
 	private JComboBox cbxSortType = new JComboBox();
 	private JComboBox cbxSearchType = new JComboBox();
 
@@ -66,7 +58,7 @@ public class Scores extends JFrame implements ActionListener {
 
 	public Scores() {
 		setTitle("Scores");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 625, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
@@ -173,7 +165,6 @@ public class Scores extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent evt) {
 
 		if (evt.getActionCommand().equals("Play")) {
-			//Gets name of user before closing this screen and opening loading screen
 			Menu.name = JOptionPane.showInputDialog("Please enter your name: ");
 			audioClip.stop();
 			this.dispose();
@@ -242,7 +233,7 @@ public class Scores extends JFrame implements ActionListener {
 		entryNum = 0;
 		scoreTable = new String[entryNum][5];
 		try {
-			FileReader inputFile = new FileReader("scores.txt");
+			FileReader inputFile = new FileReader(this.getClass().getClassLoader().getResource("scores.txt").getFile());
 			BufferedReader bufferReader = new BufferedReader(inputFile);
 
 			while ((inputText = bufferReader.readLine()) != null) {
@@ -476,7 +467,7 @@ public class Scores extends JFrame implements ActionListener {
 				}
 			}
 			catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(null, "Please enter a number.");
+				JOptionPane.showMessageDialog(null, "Please enter a valid number.");
 			}
 		} while (!isValid);
 	}

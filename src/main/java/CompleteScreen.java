@@ -1,21 +1,15 @@
+package main.java;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.EventQueue;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import java.awt.Font;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 
 /**
  * @ Description: CompleteScreen class, shows after user completes game
@@ -27,13 +21,11 @@ import javax.swing.JButton;
 
 public class CompleteScreen extends JFrame implements ActionListener {
 
-	private JPanel contentPane;
 	private int time;
 	private int points;
 	private int healthLost;
 	private int score;
-	private int exit;
-	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/completeScreenMusic.wav"));
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/completeScreenMusic.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -49,23 +41,17 @@ public class CompleteScreen extends JFrame implements ActionListener {
 	}
 
 	public CompleteScreen() {
+		JPanel contentPane;
+
 		setBackground(Color.BLACK);
 		setTitle("Game Complete!");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		time = Game.time;
-		points = Game.points;
-		healthLost = (100 - Game.health);
-		score = points - healthLost - time;
-		if (score < 0) {
-			score = 0;
-		}
 
 		JLabel lblTitle = new JLabel("Game Complete");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -145,6 +131,7 @@ public class CompleteScreen extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 
+		calculateScores();
 		appendToText();
 	}
 
@@ -156,31 +143,44 @@ public class CompleteScreen extends JFrame implements ActionListener {
 			Control.menuFrame.setVisible(true);
 		}
 		if (evt.getActionCommand(). equals ("Exit")) {
-			exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
+			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 			if (exit == 0) {
 				System.exit(0);
 			}
 		}
 	}
 
-	public void appendToText() {
+	private void appendToText() {
 		BufferedWriter bw = null;
 		try{
-			bw = new BufferedWriter(new FileWriter("scores.txt", true));
+			bw = new BufferedWriter(new FileWriter("/src/main/resources/scores.txt", true));
 			bw.write(Menu.name + "\t" + points + "\t" + healthLost + "\t" + time + "\t" + score);
 			bw.newLine();
 			bw.flush();
 		}
-		catch(IOException e){
+		catch(IOException e) {
+			e.printStackTrace();
+			System.out.println("Error writing to text file");
 		}
-		finally{
-			if(bw != null){
+		finally {
+			if (bw != null) {
 				try{
 					bw.close();
 				}
 				catch(IOException e2) {
+					System.out.println("Error closing bufferwriter.");
 				}
 			}
+		}
+	}
+
+	private void calculateScores() {
+		time = Game.time;
+		points = Game.points;
+		healthLost = (100 - Game.health);
+		score = points - healthLost - time;
+		if (score < 0) {
+			score = 0;
 		}
 	}
 }

@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * @ Description: Control class, defines all the various window frames in the program
  * @ Author: Ryan Wang

@@ -1,17 +1,14 @@
+package main.java;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 
 /**
  * @ Description: LoseScreen class, displays when user loses in the game
@@ -22,7 +19,7 @@ import javax.swing.JButton;
 
 public class LoseScreen extends JFrame implements ActionListener {
 
-	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("music/loseScreenAudio.wav"));
+	private final AudioClip audioClip = Applet.newAudioClip(this.getClass().getResource("/main/resources/music/loseScreenAudio.wav"));
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -42,7 +39,7 @@ public class LoseScreen extends JFrame implements ActionListener {
 
 		setBackground(Color.BLACK);
 		setTitle("Game Over!");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 330);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.BLACK);
